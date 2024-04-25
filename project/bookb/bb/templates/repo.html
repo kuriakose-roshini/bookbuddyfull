@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,19 +6,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="repo.css">
     <title>BookBuddy:Reports</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Archivo+Narrow");
+
+body {
+  font-family: "Archivo Narrow";
+/*   background-color: #333; */
+  color: #002c49;
+}
+
+#chartdiv {
+  width: 55%;
+  height: 550px;
+  max-height: 550px;
+  float: left;
+  box-sizing: border-box;
+}
+.chart-title{
+  font-size: 40px;
+  font-weight: 300;
+  margin: 0 0 10px 0;
+}
+.chart-title > .type{
+  display: inline-block;
+  font-size: .6em;
+  color: #B2B2B2;
+  vertical-align: super;
+  position: relative;
+  top: 4px;
+}
+.barchart-wrapper{
+  width: 45%;
+  float: right;
+  box-sizing: border-box;
+}
+
+.cat-header{
+  padding: 0px 10px;
+}
+#cat-header-stats{
+  float: right;
+  font-weight: 300;
+}
+
+#barchart {
+  height: 525px;
+  max-height: 525px;
+  box-sizing: border-box;
+}
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	/*background-color: black;*/
+  }
+  
+  li {
+	float: left;
+  }
+  
+  li a {
+	display: block;
+	color:rgb(14, 28, 68);
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+  font-size: larger;
+  }
+  li a:hover{
+    color: red;
+  }
+  body{
+    background: url(img2.jpg);
+    background-size: cover;
+  }
+   </style>
 </head>
 <body>
-    <script src="//www.amcharts.com/lib/4/core.js"></script>
+<script src="{% static 'repo.js' %}"></script>
+<script src="//www.amcharts.com/lib/4/core.js"></script>
 <script src="//www.amcharts.com/lib/4/charts.js"></script>
-<!-- <script src="https://www.amcharts.com/lib/version/4.0.16/core.js"></script>
-<script src="https://www.amcharts.com/lib/version/4.0.16/charts.js"></script> -->
 <script src="//www.amcharts.com/lib/4/themes/animated.js"></script>
 <nav>
   <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="register.html">Register</a></li>
-    <li><a href="logg.html">Login</a></li>
-    <li><a href="about.html">About</a></li>
+    <li><a href="{% url 'index' %}">Home</a></li>
+    <li><a href="{% url 'register' %}">Register</a></li>
+    <li><a href="{% url 'login' %}">Login</a></li>
+    <li><a href="{% url 'about' %}">About</a></li>
   </ul>
 </nav>
 <h2 class="chart-title">
