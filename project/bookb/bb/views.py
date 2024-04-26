@@ -23,6 +23,24 @@ def register(request):
         if request.user.is_authenticated:
             return redirect('list')
         return render(request, 'register.html', context)   
+#def save_register(request):
+ #   resp={'status':'failed', 'msg':''}
+  #  if not request.method == 'POST':
+   #     resp['msg'] = "No data has been sent on this request"
+    #else:
+     #   form = forms.SaveUser(request.POST)
+      #  if form.is_valid():
+       #     form.save()
+        #    messages.success(request, "Your Account has been created succesfully")
+         #   resp['status'] = 'success'
+        #else:
+         #   for field in form:
+          #      for error in field.errors:
+           #         if resp['msg'] != '':
+            #            resp['msg'] += str('<br />')
+             #       resp['msg'] += str(f"[{field.name}] {error}.")
+            
+    #return HttpResponse(json.dumps(resp), content_type="application/json")
 def list(request):
         template = loader.get_template('list.html')
         return HttpResponse(template.render())     
