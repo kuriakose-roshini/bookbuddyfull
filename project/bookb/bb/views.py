@@ -16,5 +16,33 @@ def login(request):
         template = loader.get_template('logg.html')
         return HttpResponse(template.render())         
 def register(request):
-        template = loader.get_template('register.html')
-        return HttpResponse(template.render())        
+        context = context_data(request)
+        context['topbar'] = False
+        context['footer'] = False
+        context['page_title'] = "Registration"
+        if request.user.is_authenticated:
+            return redirect('list')
+        return render(request, 'register.html', context)   
+def list(request):
+        template = loader.get_template('list.html')
+        return HttpResponse(template.render())     
+def context_data(request):
+    fullpath = request.get_full_path()
+    abs_uri = request.build_absolute_uri()
+    abs_uri = abs_uri.split(fullpath)[0]
+    context = {
+        'system_host' : abs_uri,
+        'page_name' : '',
+        'page_title' : '',
+        'system_name' : 'Library Managament System',
+        'topbar' : True,
+        'footer' : True,
+    }
+    return context
+        
+def mngbook(request):
+        template = loader.get_template('mngbook.html')
+        return HttpResponse(template.render())   
+def mngmem(request):
+        template = loader.get_template('mngmem.html')
+        return HttpResponse(template.render())   
