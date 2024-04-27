@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>bookbuddy/list</title>
-    <link rel="stylesheet" href="list.css">
+    <link rel="stylesheet" href="{% static 'css/list.css' %}">
     <link rel="icon" type="image/x-icon" href="logo.png">
     <script src="list.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
@@ -15,8 +16,8 @@
             <button class="dropbtn">User</button>
             <i class="bi bi-person-square"></i>
             <div class="dropdown-content">
-              <a href="profilefa.html">Profile</a>
-              <a href="">Settings</a>
+              <a href="{% url 'profilefa' %}">Profile</a>
+              <a href="{% url 'profilesett' %}">Settings</a>
             </div>
           </div>
           <div class="search">

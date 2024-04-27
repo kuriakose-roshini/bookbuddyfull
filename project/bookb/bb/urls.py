@@ -13,4 +13,6 @@ urlpatterns = [
     path('listbook/', views.list, name="list"),
     path('managebook/', views.mngbook, name="mngbook"),
     path('managemembers/', views.mngmem, name="mngmem"),
+    path('profile/', views.profile, name="profilefa"),
+    path('profile:settings/', views.profilesett, name="profilesett"),
 ]

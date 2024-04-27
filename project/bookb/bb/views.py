@@ -25,7 +25,7 @@ def register(request):
         context['footer'] = False
         context['page_title'] = "Registration"
         if request.user.is_authenticated:
-           return redirect("home-page")
+           return redirect("list")
         return render(request, 'register.html', context)
         """
         resp={'status':'failed', 'msg':''}
@@ -67,4 +67,10 @@ def mngbook(request):
         return HttpResponse(template.render())   
 def mngmem(request):
         template = loader.get_template('mngmem.html')
+        return HttpResponse(template.render())   
+def profile(request):
+        template = loader.get_template('profilefa.html')
+        return HttpResponse(template.render())   
+def profilesett(request):
+        template = loader.get_template('profilesett.html')
         return HttpResponse(template.render())   

@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <script src="profiles.js"></script>
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="{% static 'css/pps.css' %}">
+
+    <!-- FontAwesome 5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar top -->
+    <div class="navbar-top">
+        <div class="title">
+            <h1>Profile</h1>
+        </div>
+
+        <!-- Navbar -->
+        <ul>
+            <li>
+                <a href="#message">
+                    <span class="icon-count">0</span>
+                    <i class="fa fa-envelope fa-2x"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#notification">
+                    <span class="icon-count">0</span>
+                    <i class="fa fa-bell fa-2x"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#sign-out">
+                    <i class="fa fa-sign-out-alt fa-2x"></i>
+                </a>
+            </li>
+        </ul>
+        <!-- End -->
+    </div>
+    <!-- End -->
+
+    <!-- Sidenav -->
+    <div class="sidenav">
+        <div class="profile">
+            <img src="{% static 'images/logo.png' %}" alt="" width="90" height="100">
+
+            <div class="name">
+                Book Buddy
+            </div>
+            <div class="mtype">
+                Member
+            </div>
+        </div>
+
+        <div class="sidenav-url">
+            <div class="url">
+                <a href="{% url 'profilefa' %}" >Profile</a>
+                <hr align="center">
+            </div>
+            <div class="url">
+                <a href="#settings" class="active">Settings</a>
+                <hr align="center">
+            </div>
+        </div>
+    </div>
+    <!-- End -->
+
+    <!-- Main -->
+    <div class="main">
+      <h2>UPDATE:</h2>
+        <div class="card">
+             <div class="card-body">
+                 <form id="profile-form">
+                     <label for="name">Name:</label><br>
+                     <input type="text" id="name" name="name" value="John Doe"><br>
+                     <label for="email">Email:</label><br>
+                     <input type="email" id="email" name="email" value="john.doe@example.com"><br>
+                     <label for="Membership ID">Membership ID:</label><br>
+                     <input type="text" id="memid" name="memid" value="YGFIVU32"><br>
+                     <label for="Department">Department:</label><br>
+                     <input type="text" id="dept" name="dept" value="CSE">
+                     <button type="submit">Save Changes</button>
+                 </form>
+             </div> 
+         </div>
+   </div>   
+</body>
+</html>
