@@ -1,52 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="reg.css">
+    <link rel="stylesheet" href="{% static 'css/reg.css' %}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Buddy:Register</title>
-    <style>
-      body{
-        background:url(images/back7.jpg);
-        background-position-x:right ;
-        background-size: cover;
-    }
-    label {
-        display: block;
-        margin-top: 40px;
-        font-style: bold;
-        color:#2b679e;
-      }
-      
-      input[type="text"], input[type="password"] {
-        width: 100%;
-        padding: 10px;
-        margin-top: 5px;
-      }
-      
-      input[type="submit"] {
-        margin-top: 20px;
-        position: relative;
-        background-color: #2b679e;
-        color: white;
-        border-radius: 6px;
-        border: 2px solid black;
-        width: 215px;
-        font-size: larger;
-      }
-      form {
-        width: 215px;
-        margin: 0 auto;
-        padding-top: 0%;
-      }
-      .Guide{
-        background-color: none;
-        color: rgb(192, 61, 148);
-        width: 40%;
-        font-family: 'Times New Roman', Times, serif;
-        font-size: larger;
-      }
-    </style> 
 </head>
 <body>
     <div class="Guide">
@@ -62,7 +20,7 @@
         <label for="htmlfor">Name</label><br/>
         <input type="text" name="Name" id="" placeholder="Name"><br/>
         <label for="htmlfor">ID number</label><br/>
-        <input type="text" name="" id="" placeholder="Enter ID"><br/>
+        <input type="text" name="" id="" placeholder="Enter ID" required><br/>
         <label for="htmlfor">Email</label><br/>
         <input type="text" id="emailid" name="emailid" placeholder="email" required><br/>
         <label for="htmlfor">Username</label><br/>

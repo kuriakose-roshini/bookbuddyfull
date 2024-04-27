@@ -77,3 +77,9 @@ def mngbook(request):
 def mngmem(request):
         template = loader.get_template('mngmem.html')
         return HttpResponse(template.render())   
+def profile(request):
+        template = loader.get_template('profilefa.html')
+        return HttpResponse(template.render())   
+def profilesett(request):
+        template = loader.get_template('profilesett.html')
+        return HttpResponse(template.render())   
