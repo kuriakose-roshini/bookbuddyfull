@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import include,path
 from . import views
 
+
 urlpatterns = [
     path('', views.index, name="index"),
     path('admin/',admin.site.urls),
@@ -11,5 +12,5 @@ urlpatterns = [
     path('register/', views.register, name="register"),
     path('listbook/', views.list, name="list"),
     path('managebook/', views.mngbook, name="mngbook"),
-    path('managemembers/', views.mngmem, name="mangmem"),
+    path('managemembers/', views.mngmem, name="mngmem"),
 ]
