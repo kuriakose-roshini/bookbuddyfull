@@ -20,12 +20,21 @@ def login(request):
         return HttpResponse(template.render())  
         pass
 def register(request):
+
+       # if request.method=="POST": 
+        #        name=request.POST.get('Name')
+         #       idnumber=request.POST.get('id')
+          #      username=request.POST.get('emailid')
+           #     password=request.POST.get('pwd')
+            #    print(name,username,idnumber,password)
+             #  query=Reader(name=Name,idnumber=id,username=emailid,password=pwd)
+              #  query.save()
         context = context_data(request)
         context['topbar'] = False
         context['footer'] = False
         context['page_title'] = "Registration"
         if request.user.is_authenticated:
-           return redirect("home-page")
+           return redirect("list")
         return render(request, 'register.html', context)
         """
         resp={'status':'failed', 'msg':''}
