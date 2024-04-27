@@ -1,7 +1,9 @@
-
-from django.shortcuts import render,redirect
+from django.template import loader
+from . import forms
+from django.contrib import messages
+import json
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.template import loader;
 
 
 def index(request):
@@ -22,33 +24,27 @@ def register(request):
         context['topbar'] = False
         context['footer'] = False
         context['page_title'] = "Registration"
-        if request.method == 'POST':
-            form = register(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('list')
+        if request.user.is_authenticated:
+           return redirect("home-page")
+        return render(request, 'register.html', context)
+        """
+        resp={'status':'failed', 'msg':''}
+        if not request.method == 'POST':
+                resp['msg'] = "No data has been sent on this request"
         else:
-            form = register()
-        return render(request, 'register.html', {'form': form}) 
-#def save_register(request):
- #   resp={'status':'failed', 'msg':''}
-  #  if not request.method == 'POST':
-   #     resp['msg'] = "No data has been sent on this request"
-    #else:
-     #   form = forms.SaveUser(request.POST)
-      #  if form.is_valid():
-       #     form.save()
-        #    messages.success(request, "Your Account has been created succesfully")
-         #   resp['status'] = 'success'
-        #else:
-         #   for field in form:
-          #      for error in field.errors:
-           #         if resp['msg'] != '':
-            #            resp['msg'] += str('<br />')
-             #       resp['msg'] += str(f"[{field.name}] {error}.")
+                form = forms.SaveUser(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your Account has been created succesfully")
+            resp['status'] = 'success'
+        else:
+            for field in form:
+                for error in field.errors:
+                    if resp['msg'] != '':
+                        resp['msg'] += str('<br />')
+                        resp['msg'] += str(f"[{field.name}] {error}.")
             
-    #return HttpResponse(json.dumps(resp), content_type="application/json")
+        return HttpResponse(json.dumps(resp), content_type="application/json")"""
 def list(request):
         template = loader.get_template('list.html')
         return HttpResponse(template.render())     
