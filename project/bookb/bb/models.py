@@ -20,3 +20,6 @@ class Reader(models.Model):
 
     #def name(self):
      #   return str(f"{self.first_name}{' '+self.middle_name if not self.middle_name == '' else ''} {self.last_name}")
+
+    
+

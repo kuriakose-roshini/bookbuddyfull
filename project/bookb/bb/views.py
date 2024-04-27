@@ -1,8 +1,8 @@
 
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from django.template import loader
-from bb.forms import register
+from django.template import loader;
+
 
 def index(request):
         template = loader.get_template('index.html')
@@ -15,7 +15,8 @@ def report(request):
         return HttpResponse(template.render()) 
 def login(request):
         template = loader.get_template('logg.html')
-        return HttpResponse(template.render())         
+        return HttpResponse(template.render())  
+        pass
 def register(request):
         context = context_data(request)
         context['topbar'] = False
