@@ -1,4 +1,14 @@
 from django.db import models
+#from distutils.command.upload import upload
+from email.policy import default
+from django.db import models
+from django.utils import timezone
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+#from PIL import Image
+from django.contrib.auth.models import User
+from django.contrib.auth.base_user import BaseUserManager
 
 # Create your models here.
 class Reader(models.Model):
@@ -8,8 +18,8 @@ class Reader(models.Model):
     username=models.CharField(max_length=30,null=True)
     password=models.CharField(max_length=8,blank=False,null=False)
 
-    class Meta:
-        verbose_name_plural = "List of Readers"
+    #class Meta:
+       # verbose_name_plural = "List of Readers"
     
     def __str__(self) :
         return self.username
@@ -21,7 +31,7 @@ class Reader(models.Model):
     #def name(self):
      #   return str(f"{self.first_name}{' '+self.middle_name if not self.middle_name == '' else ''} {self.last_name}")
 
-    #class Books(models.Model):
+   # class Books(models.Model):
     # no= models.IntegerField(max_length=10,blank=False,null=False)
      #name_of_book= models.CharField(max_length=30,blank=False,null=False)
    # borrowing_date = models.DateField()
@@ -35,6 +45,16 @@ class Reader(models.Model):
 
     #def __str__(self):
      #   return self.name_of_book
+class Borrower(models.Model):
+    b_name=models.CharField(max_length=20,blank=False,null=True)
+    b_idnumber=models.ForeignKey(Reader, on_delete=models.CASCADE)
+    b_emailid=models.EmailField(null=True)
+    b_username=models.CharField(max_length=30,null=True)
+    b_date_of_borrow=models.DateField()
+    b_return_date=models.DateField()
+
+    def __str__(self):
+        return self.b_username
 
     
 

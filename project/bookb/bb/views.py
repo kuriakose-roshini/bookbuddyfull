@@ -4,6 +4,7 @@ from django.contrib.auth .models import User
 import json
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from .models import Reader
 
 
 def index(request):
@@ -48,8 +49,12 @@ def mngbook(request):
         template = loader.get_template('mngbook.html')
         return HttpResponse(template.render())   
 def mngmem(request):
+        dict_reader={
+                'reader':Reader.objects.all()
+        }
         template = loader.get_template('mngmem.html')
-        return HttpResponse(template.render())   
+        return render(request, 'mngmem.html',dict_reader)
+       # return HttpResponse(template.render())   
 def profile(request):
         template = loader.get_template('profilefa.html')
         return HttpResponse(template.render())   
