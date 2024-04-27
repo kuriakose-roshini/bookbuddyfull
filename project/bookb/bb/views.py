@@ -1,7 +1,8 @@
+
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.template import loader
-
+from bb.forms import register
 
 def index(request):
         template = loader.get_template('index.html')
@@ -20,9 +21,15 @@ def register(request):
         context['topbar'] = False
         context['footer'] = False
         context['page_title'] = "Registration"
-        if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = register(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
             return redirect('list')
-        return render(request, 'register.html', context)   
+        else:
+            form = register()
+        return render(request, 'register.html', {'form': form}) 
 #def save_register(request):
  #   resp={'status':'failed', 'msg':''}
   #  if not request.method == 'POST':
