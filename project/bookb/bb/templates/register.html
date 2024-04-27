@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Buddy:Register</title>
 </head>
-<body>
+<body>{% block content%}
     <div class="Guide">
         <h3>Guidelines</h3>
         <ul>
@@ -17,6 +18,7 @@
         </ul>
       </div>   
     <form action="">
+      {% csrf_token %}
         <label for="htmlfor">Name</label><br/>
         <input type="text" name="Name" id="" placeholder="Name"><br/>
         <label for="htmlfor">ID number</label><br/>
@@ -29,8 +31,13 @@
         <input type="password" id="pwd" name="pwd" placeholder="password" required><br/>
         <input type="password" id="pwd" name="pwd" placeholder="confirm the password" required><br/>
         <input type="submit" value="Submit"> 
-       
-    </form>
+      </form>
+      <p>
+        {% if user %}
+        New user created
+        {% endif %}
+      </p>
+      {% endblock content %}
 </body>
 </html>
 

@@ -1,6 +1,6 @@
 from django.template import loader
 from . import forms
-from django.contrib import messages
+from django.contrib.auth .models import User
 import json
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -20,31 +20,20 @@ def login(request):
         return HttpResponse(template.render())  
         pass
 def register(request):
-        context = context_data(request)
-        context['topbar'] = False
-        context['footer'] = False
-        context['page_title'] = "Registration"
+        if request.POST:
+                error_message=None
+                name=request.POST['name']
+                idno=request.POST['IdNo']
+                email=request.POST['email']
+                username=request.POST['username']
+                password=request.POST['password']
+                try:
+                        User.objects.create_user(name=name,idno=idno,email=email,username=username,password=password)
+                except Exception as e:
+                        error_message=str(e)
         if request.user.is_authenticated:
-           return redirect("list")
-        return render(request, 'register.html', context)
-        """
-        resp={'status':'failed', 'msg':''}
-        if not request.method == 'POST':
-                resp['msg'] = "No data has been sent on this request"
-        else:
-                form = forms.SaveUser(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Your Account has been created succesfully")
-            resp['status'] = 'success'
-        else:
-            for field in form:
-                for error in field.errors:
-                    if resp['msg'] != '':
-                        resp['msg'] += str('<br />')
-                        resp['msg'] += str(f"[{field.name}] {error}.")
-            
-        return HttpResponse(json.dumps(resp), content_type="application/json")"""
+                return redirect("list")        
+        return render(request,'register.html')        
 def list(request):
         template = loader.get_template('list.html')
         return HttpResponse(template.render())     
