@@ -18,11 +18,23 @@ class Reader(models.Model):
     username=models.CharField(max_length=30,null=True)
     password=models.CharField(max_length=8,blank=False,null=False)
 
+
+
+class Book(models.Model):
+    No=models.CharField(max_length=30)
+    Title=models.CharField(max_length=200) 
+    Name_of_Author=models.CharField(max_length=200)
+    Publisher=models.CharField(max_length=250)
+    Arrival_date=models.DateField()
+    No_Of_copies_Available=models.CharField(max_length=30,null=False)
+     
+
+     
     #class Meta:
        # verbose_name_plural = "List of Readers"
     
-    def __str__(self) :
-        return self.username
+  #  def __str__(self) :
+    #  return self.username
 
     
     #def __str__(self):

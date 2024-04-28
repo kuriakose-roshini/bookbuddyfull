@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Reader
+from.models import Book
 from . import forms
 
 
@@ -45,8 +46,12 @@ def register(request):
                          error_message=str(e)
         return render(request,'register.html')        
 def list(request):
+        dict_book={
+               'book':Book.objects.all()
+        }
         template = loader.get_template('list.html')
-        return HttpResponse(template.render())             
+        return render(request,'list.html',dict_book)
+        #return HttpResponse(template.render())             
 def mngbook(request):
         template = loader.get_template('mngbook.html')
         return HttpResponse(template.render())   
