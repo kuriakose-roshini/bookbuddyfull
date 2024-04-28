@@ -1,10 +1,10 @@
 from django.template import loader
-from . import forms
-from django.contrib.auth .models import User
-import json
+from django.contrib.auth import authenticate, login as authlogin, logout as authlogout
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Reader
+from . import forms
 
 
 def index(request):
@@ -17,34 +17,36 @@ def report(request):
         template = loader.get_template('repo.html')
         return HttpResponse(template.render()) 
 def login(request):
-        template = loader.get_template('logg.html')
-        return HttpResponse(template.render())  
-        pass
+        error_message=None
+        if request.POST: 
+                username=request.POST['username']   
+                password=request.POST['password'] 
+                user=authenticate(username=username,password=password)
+                if user:
+                   authlogin(request,user)
+                   return redirect('list')
+                else :
+                   error_message='invalid credentials'     
+        return render(request,'logg.html')  
+def logout(request):
+        authlogout(request)
+        return redirect('login')        
 def register(request):
-        context = context_data(request)
-        context['topbar'] = False
-        context['footer'] = False
-        context['page_title'] = "Registration"
-        if request.user.is_authenticated:
-                return redirect("list")        
+        error_message=None
+        if request.POST:
+                 name=request.POST['name']   
+                 idno=request.POST['idno']   
+                 email=request.POST['email']  
+                 username=request.POST['username']   
+                 password=request.POST['password'] 
+                 try:
+                         user=User.objects.create_user(name=name,idno=idno,email=email,username=username,password=password)      
+                 except Exception as e:
+                         error_message=str(e)
         return render(request,'register.html')        
 def list(request):
         template = loader.get_template('list.html')
-        return HttpResponse(template.render())     
-def context_data(request):
-    fullpath = request.get_full_path()
-    abs_uri = request.build_absolute_uri()
-    abs_uri = abs_uri.split(fullpath)[0]
-    context = {
-        'system_host' : abs_uri,
-        'page_name' : '',
-        'page_title' : '',
-        'system_name' : 'Library Managament System',
-        'topbar' : True,
-        'footer' : True,
-    }
-    return context
-        
+        return HttpResponse(template.render())             
 def mngbook(request):
         template = loader.get_template('mngbook.html')
         return HttpResponse(template.render())   

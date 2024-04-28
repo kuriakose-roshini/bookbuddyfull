@@ -114,7 +114,7 @@ body{
         <section>
           <input checked name='login' type='radio'>
           <p>
-            Student Login
+            member Login
           </p>
           <form class="studentForm"> 
             <input id="studentUsername" placeholder='Username' type='text'>
@@ -123,18 +123,7 @@ body{
             <button id="studentSubmit" class="button">Submit</button>
           </form>
         </section>
-        <section>
-          <input name='login' type='radio'>
-          <p>
-            Faculty Login
-          </p>
-          <form class="facultyForm">
-            <input id='facultyUsername'placeholder='Username' type='text'>
-            <input id='facultyPassword' placeholder='Password' type='password'required><br>
-            <button id="facultySubmit" class="button">Submit</button>
-          </form>
-        </section>
-        <section>
+        <section> {% comment %}
           <input name='login' type='radio'>
           <p>
             Admin Login
@@ -144,7 +133,7 @@ body{
             <input id='adminPassword' placeholder='Password' type='password' required><br>
             <button id="adminSubmit" class="button">Submit</button>
           </form>
-        </section>
+        </section> {% endcomment %}
       </div>
    
 </body>

@@ -34,7 +34,12 @@ label {
   .Guide{
     background-color: none;
     color: rgb(192, 61, 148);
-    width: 40%;
+    width: 40px;
     font-family: 'Times New Roman', Times, serif;
     font-size: larger;
+  }
+  p{
+    position:center;
+    font-size: medium;
+
   }
