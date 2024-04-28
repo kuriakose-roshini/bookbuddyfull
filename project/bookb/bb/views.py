@@ -1,12 +1,11 @@
 from django.template import loader
 from django.contrib.auth import authenticate, login as authlogin, logout as authlogout
-from django.contrib.auth.models import User, auth
+from django.contrib.auth.models import User,auth
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .models import Reader
-from.models import Book
 from . import forms
-#from .forms import RegisterForm
 
 
 def index(request):
@@ -34,7 +33,6 @@ def logout(request):
         authlogout(request)
         return redirect('login')        
 def register(request):
-                 
         error_message=None
         if request.method == 'POST':
                  name=request.POST['Name']   
@@ -54,7 +52,8 @@ def register(request):
                  return redirect(' login ')
                 #else:
         else :              
-                return render(request,'register.html')        
+                return render(request,'register.html')   
+@login_required(login_url='login/')             
 def list(request):
         dict_book={
                'book':Book.objects.all()
@@ -78,3 +77,12 @@ def profile(request):
 def profilesett(request):
         template = loader.get_template('profilesett.html')
         return HttpResponse(template.render())   
+def search_book(request):
+    if request.method == 'GET':
+        input_query = request.GET.get('searchbar', '').lower()
+        books = Book.objects.filter(title__icontains=input_query)  # Assuming 'title' is the field to search
+        return render(request, 'search_results.html', {'books': books})
+        #if request.method =='GET':
+                #search=request.GET.get('search')
+                #post=bb.objects.all().filter(title=search)
+                #return render(request,'searchbar.html',{'post':post})

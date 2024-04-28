@@ -11,7 +11,7 @@
 }
 
 header {
-	background-color: #a2cffa;
+	background-color: #5b91c4;
 	color: rgb(26, 25, 25);
 	padding: 1em;
 }
@@ -22,7 +22,7 @@ header h1 {
 
 nav {
 	color:black;
-	padding: 1em;
+	padding: 2em;
 }
 h2 {
 	margin-top: 0;
@@ -56,11 +56,12 @@ footer {
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
+  background-color: aliceblue;
     display: block;
   }
   
   li a:hover {
-	background-color:#a2cffa;
+	background-color:#5394d1;
 	color:white;
   }
 /*about css*/
