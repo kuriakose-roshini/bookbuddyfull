@@ -1,11 +1,12 @@
 from django.template import loader
 from django.contrib.auth import authenticate, login as authlogin, logout as authlogout
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, auth
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Reader
 from.models import Book
 from . import forms
+#from .forms import RegisterForm
 
 
 def index(request):
@@ -33,18 +34,27 @@ def logout(request):
         authlogout(request)
         return redirect('login')        
 def register(request):
+                 
         error_message=None
-        if request.POST:
-                 name=request.POST['name']   
-                 idno=request.POST['idno']   
-                 email=request.POST['email']  
-                 username=request.POST['username']   
-                 password=request.POST['password'] 
+        if request.method == 'POST':
+                 name=request.POST['Name']   
+                 idno=request.POST['idno'] 
+                 emailid=request.POST['emailid']  
+                 username=request.POST['u_name']   
+                 password1=request.POST['pwd1'] 
+                 password2=request.Post['pwd2']
                  try:
-                         user=User.objects.create_user(name=name,idno=idno,email=email,username=username,password=password)      
+                  user=User.objects.create_user(name=name,idno=idno,email=emailid,username=username,password=password1)      
                  except Exception as e:
-                         error_message=str(e)
-        return render(request,'register.html')        
+                  error_message=str(e)
+                #form = RegisterForm(response.POST)
+                #if form.is_valid():
+                 user.save()
+                 print("user created")
+                 return redirect(' login ')
+                #else:
+        else :              
+                return render(request,'register.html')        
 def list(request):
         dict_book={
                'book':Book.objects.all()
