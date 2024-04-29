@@ -68,5 +68,19 @@ class Borrower(models.Model):
     def __str__(self):
         return self.b_username
 
-    
+class Customer(models.Model):
+
+    LIVE = 0
+    DELETE = 0
+    DELETE_CHOICES = ((LIVE,'Live'),(DELETE,'Delete'))
+
+    name = models.CharField(max_length=100,null=False,blank=False)
+    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='customer_profile')
+ 
+
+
+
+    deleted_status = models.IntegerField(choices=DELETE_CHOICES ,default=LIVE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now = True)    
 
