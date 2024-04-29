@@ -1,11 +1,15 @@
 from django.template import loader
 from django.contrib.auth import authenticate, login as authlogin, logout as authlogout
-from django.contrib.auth.models import User, auth
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Reader
+from . models import Reader
 from . import forms
+from django.db import IntegrityError
+from django.contrib import messages
 #from .forms import RegisterForm
+
+
 
 
 def index(request):
@@ -31,29 +35,94 @@ def login(request):
         return render(request,'logg.html')  
 def logout(request):
         authlogout(request)
-        return redirect('login')        
-def register(request):
+        return redirect('login')     
+#def register(request):
+ #       template = loader.get_template('register.html')
+ #       return HttpResponse(template.render())    
+#def register(request):
+    #context = context_data(request)
+    #context['topbar'] = False
+    #context['footer'] = False
+    #context['page_title'] = "User Registration"
+   # if request.user.is_authenticated:
+    #    return redirect('register')
+    #return render(request, 'login')
+#def register(request):
                  
-        error_message=None
-        if request.method == 'POST':
-                 name=request.POST['Name']   
-                 idno=request.POST['idno'] 
-                 emailid=request.POST['emailid']  
-                 username=request.POST['u_name']   
-                 password1=request.POST['pwd1'] 
-                 password2=request.Post['pwd2']
-                 try:
-                  user=User.objects.create_user(name=name,idno=idno,email=emailid,username=username,password=password1)      
-                 except Exception as e:
-                  error_message=str(e)
+        #error_message=None
+        #if request.method == 'POST':
+                 #Name = request.POST.get('Name')   
+                 #idno = request.POST.get('idno') 
+                 #emailid = request.POST.get('emailid') 
+                 #u_name = request.POST.get('u_name')  
+                 #pwd1 = request.POST.get('pwd1') 
+                 #pwd2 = request.Post('pwd2')
+                 #try:
+                 ##reader_obj = Reader.objects.create(Name=Name,idno=idno,emailid=emailid,u_name=u_name,pwd=pwd1)      
+                 #except Exception as e:
+                  #error_message=str(e)
                 #form = RegisterForm(response.POST)
                 #if form.is_valid():
-                 user.save()
-                 print("user created")
-                 return redirect(' login ')
+                 #reader_obj.save()
+                 #print("user created")
+                 #if request.user.is_authenticated:
+                 # return redirect( 'login')
                 #else:
-        else :              
-                return render(request,'register.html')        
+        #else :              
+       # return render(request,'register.html')      
+
+def register(request):
+ 
+    try:
+        if request.POST:
+            name = request.POST.get('name')
+            username = request.POST.get('username')
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+
+
+            user = User.objects.create_user(
+                    username = username,
+                    password = password,
+                    email = email,
+                )
+        
+            #role = request.POST.get('options')
+
+            reader = Reader.objects.create(
+                    user = user,
+                    name = name,
+                    email = email
+                )
+            
+        #if(role=='teacher'):
+             #   return redirect("home")
+            #else:
+        return redirect("login")
+            
+    except IntegrityError as e:
+        print(f"IntegrityError: {e}")
+        error_message = "Duplicate username or invalid input data"
+        print(error_message)
+        messages.error(request,error_message)
+
+       
+
+    return render(request,'register.html')
+
+
+#def Login(request):
+  #  if request.POST:
+   #     username = request.POST.get('username')
+    #    password = request.POST.get('password')
+     #   user = authenticate(username=username,password=password)
+      #  if user:
+#            login(request,user)
+ #    return redirect('home1')
+  #      else:
+   #         print("Inside error block")
+    #        messages.error(request,'Invalid credentials.')
+    #return render(request,"login.html")  
 def list(request):
         template = loader.get_template('list.html')
         return HttpResponse(template.render())             
