@@ -1,13 +1,13 @@
 from django.template import loader
 from django.contrib.auth import authenticate, login as authlogin, logout as authlogout
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,auth
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from . models import Reader
+from .models import Reader 
 from . import forms
 from django.db import IntegrityError
 from django.contrib import messages
-#from .forms import RegisterForm
 
 
 
@@ -142,3 +142,12 @@ def profile(request):
 def profilesett(request):
         template = loader.get_template('profilesett.html')
         return HttpResponse(template.render())   
+def search_book(request):
+    if request.method == 'GET':
+        input_query = request.GET.get('searchbar', '').lower()
+        books = Book.objects.filter(title__icontains=input_query)  # Assuming 'title' is the field to search
+        return render(request, 'search_results.html', {'books': books})
+        #if request.method =='GET':
+                #search=request.GET.get('search')
+                #post=bb.objects.all().filter(title=search)
+                #return render(request,'searchbar.html',{'post':post})
