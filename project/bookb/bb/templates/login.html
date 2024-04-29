@@ -128,35 +128,48 @@
 
 
 
+{% if messages %}
+
+<div class="message-container" style="  background: #fff;
+width: 400px;
+height: fit-content;
+position: relative;
+text-align: center;
+padding: 20px 0;
+color: red;
+margin: auto;
+box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1); 
+overflow: hidden;
+border-radius: 8px;
+opacity: .9;">
+    {% for message in  messages %}
+        <li style="list-style: none;" class="{{ message.tags }}">{{ message }} </li>
+    {% endfor %}
+</div>
+
+{% endif %}
 
 
 
 
-
-    <!-- Registration Form -->
+    <!-- Login Form -->
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">REGISTER</div>
+                    <div class="card-header">LOGIN</div>
                     <div class="card-body">
 
 
 
                         <form action="" id="RegForm" method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="name" placeholder="Name" name="name" required>
-                                <label for="name">Name</label>
-                            </div>
+                        
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="username" placeholder="Username" name="username" required>
                                 <label for="username">Username</label>
                             </div>
-                            <div class="form-floating">
-                                <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
-                                <label for="email">Email</label>
-                            </div>
+                        
                             <div class="form-floating">
                                 <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
                                 <label for="password">Password</label>
@@ -165,9 +178,10 @@
                            
 
                             <div class="form-text mb-3">
-                                <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="{% url 'login' %}">Login</a>
+                                <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a> | <a href="{% url 'user' %}">Register</a>
                             </div>
-                            <button type="submit" class="btn btn-primary">Register</button>
+
+                            <button type="submit" class="btn btn-primary">Login</button>
                         </form>
 
 
