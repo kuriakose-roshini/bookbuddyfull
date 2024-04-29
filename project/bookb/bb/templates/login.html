@@ -100,15 +100,24 @@
             font-family: 'Times New Roman', Times, serif;
             font-size: larger;
           }
-          .nav{
-            background-color:white;
+          .nav:link, a:visited {
+            background-color: white;
+            color: black;
+            border: 2px solid green;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+          }
+          
+          .nav:hover, a:active {
+            background-color: rgb(28, 146, 167);
+            color: white;
           }
     </style>
 </head>
 <body>
-		<button class="nav">
-				<a href="{% url 'index' %}">Home</a>
-        </button>   
+    <a class="nav" href="{% url 'index' %}">Home</a>  
         <div class="Guide">
             <h3>Guidelines</h3>
             <ul>
