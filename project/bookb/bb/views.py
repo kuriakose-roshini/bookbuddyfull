@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Reader
-#from.models import Book
+from .models import Book
 from . import forms
 from django.db import IntegrityError
 from django.contrib import messages
@@ -85,7 +85,11 @@ def Register(request):
 
 # @login_required
 def listBook(request):
-        return render(request,"list.html")            
+        dict_books={
+             'books':Book.objects.all()
+         }
+        #books=Book.objects.all()
+        return render(request,'list.html',dict_books )            
 def mngbook(request):
         template = loader.get_template('mngbook.html')
         return HttpResponse(template.render())   
