@@ -12,6 +12,7 @@ table,th{
     width: 1000px;
     text-align: center;
     font-size: larger;
+    background-color: #1bbcd175;
     position: center;
 }
 td{
@@ -20,6 +21,7 @@ td{
     width: 1500px;
     text-align: center;
     font-size: larger;
+    background-color: #1bbcd175;
 }
 button{
     display: inline-block;
@@ -72,4 +74,18 @@ button:hover{
     float: right;
     width: 25%;
     height: 25%;
+  }
+  a:link, a:visited {
+    background-color: white;
+    color: black;
+    border: 2px solid green;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  a:hover, a:active {
+    background-color: rgb(28, 146, 167);
+    color: white;
   }

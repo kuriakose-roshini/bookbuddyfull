@@ -33,7 +33,7 @@ def Login(request):
         user = authenticate(username=username,password=password)
         if user:
             login(request,user)
-            return redirect('register')
+            return redirect('list')
         else:
             print("Inside error block")
             messages.error(request,'Invalid credentials.')
