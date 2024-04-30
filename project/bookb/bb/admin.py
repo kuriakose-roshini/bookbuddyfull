@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import Reader,Borrower,Customer
+from .models import Reader,Borrower,Book
 
 # Register your models here.
 admin.site. register(Reader)
 admin.site. register(Borrower)
-admin.site. register(Customer)
+admin.site. register(Book)

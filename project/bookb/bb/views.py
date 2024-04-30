@@ -3,7 +3,8 @@ from django.contrib.auth import authenticate, login as authlogin, logout as auth
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from . models import Reader
+from .models import Reader
+from .models import Book
 from . import forms
 from django.db import IntegrityError
 from django.contrib import messages
@@ -11,8 +12,8 @@ from django.contrib.auth import authenticate,login,logout
 from .models import Customer
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-#from .models import Book
-#from .forms import BookSearchForm
+from .models import Book
+from .forms import BookSearchForm
 
 #from .forms import RegisterForm
 
@@ -87,7 +88,11 @@ def Register(request):
 
 #@login_required
 def listBook(request):
-        return render(request,"list.html")            
+        dict_books={
+             'books':Book.objects.all()
+         }
+        #books=Book.objects.all()
+        return render(request,'list.html',dict_books )            
 def mngbook(request):
         template = loader.get_template('mngbook.html')
         return HttpResponse(template.render())   
@@ -104,9 +109,9 @@ def profile(request):
 def profilesett(request):
         template = loader.get_template('profilesett.html')
         return HttpResponse(template.render())   
-# def search_book(request):
-#    query = request.GET.get('query')
-#     results = []
-#    if query:
-#        results = Book.objects.filter(title__icontains=query) | Book.objects.filter(author__icontains=query)
-#  return render(request, 'books/book_search.html', {'query': query, 'results': results})
+def search_book(request):
+   query = request.GET.get('query')
+   results = []
+   if query:
+        results = Book.objects.filter(title__icontains=query) | Book.objects.filter(author__icontains=query)
+   return render(request, 'search_book.html', {'query': query, 'results': results})

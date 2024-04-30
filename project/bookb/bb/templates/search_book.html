@@ -7,16 +7,9 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-<h2 style="padding-left: 30px;">Find your favourite book    
-    <input type="text" id="searchbar">
-    <button onclick="searchBook()">Search</button></h2>
-    <ul>
-        {% for book in books %}
-            <li>{{ book.title }}</li>
-        {% endfor %}
-    </ul>
-    {% comment "" %}
-      <h1>Book Search</h1>
+     <h2 style="padding-left: 30px;">Find your favourite book    
+    <input type="text" id="searchbar"></h2>
+
     <form method="GET">
         {{ form.as_p }}
         <button type="submit">Search</button>
@@ -33,6 +26,6 @@
     {% endif %}
 </body>
 </html>
-</div>{% endcomment %}
+</div>
 </body>
 </html>

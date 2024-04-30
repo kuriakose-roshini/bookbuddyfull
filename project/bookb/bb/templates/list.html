@@ -1,4 +1,4 @@
-{% load static %}
+ {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,6 +28,7 @@
           </div>  
     </nav>
     <table>
+       <!-- <thead> -->
        <tr> 
         <th>No</th>
         <th>Title</th>
@@ -35,9 +36,23 @@
         <th>Name of Publisher</th>
         <th>Date of Arrival</th>
         <th>No Of Copies Available</th>
-       <th>Option</th>
+        <th>Option</th>
        </tr> 
+<!-- database display 
+         { % for i in books % }
        <tr>
+           <td>{{ i.No }}</td>
+           <td>{{ i.Title }}</td>
+           <td>{{ i.Name_of_Author }}</td>
+           <td>{{i.Publisher}}</td>
+           <td>{{ i.Arrival_date }}</td>
+           <td>{{ i.No_Of_Copies_Available}}</td>
+           <td>
+            <button>REQUEST</button>
+          </td>
+       </tr>
+          { % endfor % } -->
+        <tr> 
         <td>0001</td>
         <td>
          Introduction to Algorithms
@@ -72,7 +87,7 @@
         <td>
             <button>REQUEST</button>
         </td>
-       </tr>
+       </tr> 
     </table>
 </body>
 </html>
