@@ -79,7 +79,20 @@ Source: https://wallpapersafari.com/hd-library-wallpaper/
 h1{
     font-size: 50px;
 }
-
+.nav:link{
+    background-color: white;
+    color: black;
+    border: 2px solid green;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .nav:hover{
+    background-color: rgb(28, 146, 167);
+    color: white;
+  }
 @media (max-width: 976px){
     #one-page{
         height: 150%;

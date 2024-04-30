@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import include,path
 from . import views
 from .views import profile
-#from .views import listBook
+
 
 urlpatterns = [
     path('', views.index, name="index"),
@@ -14,7 +14,7 @@ urlpatterns = [
     path('logout/', views.loggot, name="Logout"),
     path('adminlogin/', views.AdminLogin, name="adminlogin"),
     path('logout/', views.logout, name="logout"),
-    path('searchbook/', views.search_book, name="search_book"),
+    #path('searchbook/', views.search_book, name="search_book"),
     path('listbook/', views.listBook, name="list"),
     path('managebook/', views.mngbook, name="mngbook"),
     path('managemembers/', views.mngmem, name="mngmem"),

@@ -12,10 +12,13 @@ from django.contrib.auth import authenticate,login,logout
 from .models import Customer
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from .models import Book
+#from .models import Book
+#from .models import Invoice, is_due_date_approaching
 from .forms import BookSearchForm
 from django.http import JsonResponse
 from .models import LibraryItem
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import View
 
 #from .forms import RegisterForm
 
@@ -59,8 +62,8 @@ def AdminLogin(request):
  
 def logout(request):
         authlogout(request)
-        return redirect('login')     
-      
+        return redirect('login')    
+
 def loggot(request):
         authlogout(request)
         return redirect('index')
@@ -75,7 +78,7 @@ def Register(request):
 
 
             user = User.objects.create_user(
-                    name = name,
+                    #name = name,
                     username = username,
                     password = password,
                     email = email,
@@ -90,7 +93,7 @@ def Register(request):
 
       
             
-            return redirect("list")
+            return redirect('login')
             
     except IntegrityError as e:
         print(f"IntegrityError: {e}")
@@ -112,14 +115,37 @@ def listBook(request):
 def mngbook(request):
         template = loader.get_template('mngbook.html')
         return HttpResponse(template.render())  
+        book = Book.objects.all()
+        try:
+                if request.POST and "ADD" in request.POST:
+                        Title= request.POST.get('Title')
+                        Name_of_Author= request.POST.get('Name_of_Author')
+                        Publisher = request.POST.get('Publisher')
+                        Arrival_date = request.POST.get('Arrival_date')
+                        No_Of_Copies_Available=request.POST.get('No_Of_Copies_Available')
+                        print(Title)
+                        print(Name_of_Author)
+                        print(Publisher)
+                        print(Arrival_date)
+                        print(No_Of_Copies_Available)
 
+                        Book=book.objects.create_book(
+                                Title=Title,
+                                Name_of_Author=Name_of_Author,
+                                Publisher=Publisher,
+                                Arrival_date=Arrival_date # Use first_name instead of name
+                        )              
+                                  
+        except IntegrityError as e:
+                print(f"IntegrityError: {e}")
+                error_message = "invalid input data"
+                print(error_message)
+                messages.error(request,error_message)
+        return render(request, 'mngmem.html',{'book':book})
 
 
 def mngmem(request):
         reader = Customer.objects.all()
-       
-
-
         try:
                 if request.POST and "ADD" in request.POST:
                         name = request.POST.get('name')
@@ -134,38 +160,18 @@ def mngmem(request):
                                 username=username,
                                 email=email,
                                 password=password,
-                                first_name=name  # Use first_name instead of name
-                        )
-                        
-                        
-                     
-
+                                first_name=name  
+                        )              
                         customer = Customer.objects.create(
                                 user = user,
                                 name = name,
-                                
-                                )
-
-
-      
-            
-        
-            
+                               
+                                )           
         except IntegrityError as e:
                 print(f"IntegrityError: {e}")
                 error_message = "Duplicate username or invalid input data"
                 print(error_message)
                 messages.error(request,error_message)
-
-       
- 
-
-
-
-
-
-
-       
         return render(request, 'mngmem.html',{'reader':reader})
        
 @login_required  
@@ -179,16 +185,35 @@ def profilesett(request):
         return HttpResponse(template.render())   
 
 
-#  def search_book(request):
-# #    query = request.GET.get('query')
-#     results = []
-#   if query:
-#         results = Book.objects.filter(title__icontains=query) | Book.objects.filter(author__icontains=query)
-# return render(request, 'search_book.html', search_book{'query': query, 'results': results})
+# #fine calculation
+# from django.shortcuts import render, redirect
+# from .models import BorrowedBook
 
-def search_book(request):
-   query = request.GET.get('query')
-   results = []
-   if query:
-        results = Book.objects.filter(title__icontains=query) | Book.objects.filter(author__icontains=query)
-   return render(request, 'search_book.html', {'query': query, 'results': results})
+# def return_book(request, borrowed_book_id):
+#     borrowed_book = BorrowedBook.objects.get(pk=borrowed_book_id)
+#     fine = borrowed_book.calculate_fine
+#     # You can add the fine to the user's account or display it on the return page
+#     return render(request, 'return_book.html', {'fine': fine})
+
+# #message notification
+# def send_due_date_notification(request):
+#     invoices = Invoice.objects.all()
+#     for invoice in invoices:
+#         if is_due_date_approaching(invoice):
+#             notification_message = "Your invoice with due date {invoice.due_date} is approaching. Please make sure to pay on time."
+#             messages.info(request, notification_message)
+#     return render(request, 'notification_sent.html')
+
+
+#logout
+# views.py
+# from django.contrib.auth import logout
+# from django.shortcuts import redirect
+# def logout_view(request):
+#     logout(request)
+#     response = redirect('login')  # Redirect to your login page
+#     response['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+#     response['Pragma'] = 'no-cache'
+#     response['Expires'] = '0'
+#     return response
+        

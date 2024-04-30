@@ -52,7 +52,7 @@
             <h1 class="text-light">Book Buddy</h1><br>
             <h3>Member Management</h3>
         </div>
-
+        <a class="nav" href="{% url 'Logout' %}">Logout</a>
         <!-- mngmem.html -->
 
 <div class="col-lg-5">
@@ -76,8 +76,8 @@
       </div>
       <div class="add-button mt-4">
           <button type="submit" name="ADD" class="btn btn-danger btn-block" id="add">ADD</button>
-      </div>
       <a class="btn btn-danger btn-block" href="{% url 'mngbook' %}">Manage Book</a>
+    </div>
   </form>
 </div>
 

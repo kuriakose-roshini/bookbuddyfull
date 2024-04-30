@@ -26,18 +26,33 @@
     <link rel="stylesheet" href="mngbook.css">
     <link rel="stylesheet" href="/CSS/book_list.css">
     <link rel="stylesheet" href="/CSS/insertion_section.css">
+    <style>
+        /* Custom CSS */
+        #mem_list {
+            margin-top: 20px;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #ffff;
+        }
+        .close {
+            cursor: pointer;
+        }
+        .close:hover {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <section id="one-page">
         <div class="container">
             <!-- Title -->
             <div class="row">
-                <h1 class="text-light">Library System</h1><br>
+                <h1 class="text-light">Book Buddy</h1><br>
                 <h3>Book Management</h3>
             </div>
             <a class="nav" href="{% url 'Logout' %}">Logout</a>
             <div class="row mt-4">
-                <!-- insertion section -->
+                <!-- insertion section --><!--
                 <div class="col-lg-5" id="insertion_section">
                     <form class="form-group justify-content-center">
                         <div class="row" id="name-section">
@@ -62,10 +77,35 @@
                                 <input type="number" class="form-control" id="numberPage">
                             </div>
                             <div class="col-6">
-                                <label for="serialNumber" class="text-light">Accession Number</label>
+                                <label for="serialNumber" class="text-light">Number</label>
                                 <input type="number" class="form-control" id="serialNumber">
                             </div>
                         </div>
+                    -->
+                        
+<div class="col-lg-5">
+    <form action="" id="RegForm" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-floating">
+            <input type="text" class="form-control" id="name" placeholder="Title" name="name" required>
+            <label for="name">Title</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="username" placeholder="Author" name="username" required>
+            <label for="username">Author</label>
+        </div>
+        <div class="form-floating">
+            <input type="email" class="form-control" id="email" placeholder="Publisher" name="email" required>
+            <label for="email">Publisher</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="password" placeholder="Arrival Date" name="password" required>
+            <label for="password">Arrival Date</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="password" placeholder="No of copies available" name="password" required>
+            <label for="password">No of copies Available</label>
+        </div>
                         <div class="add-button mt-4">
                             <button type="button" class="btn btn-danger btn-block" id="add" >ADD</button>
                             <a class="btn btn-danger btn-block" href="{% url 'mngmem' %}">Manage Member</a>
@@ -81,133 +121,28 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Author</th>
                                 <th scope="col">Publisher</th>
-                                <th scope="col">Date of arrival</th>
-                                <th scope="col">No Of Copies</th>
+                                <th scope="col">Arrival_Date</th>
+                                <th scope="col">No_Of_Copies_Available</th>
                                 <th scope="col">number</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody id="tabs">
+                          {% for book in book %}
                             <tr class="tab">
-                                <th scope="row">Introduction to Algorithms</th>
-                                <td>Setmour Lipschutz</td>
-                                <td>Schum's Outlines</td><td>01/08/2023</td>
-                                <td>10</td>
-                                <td>0001</td>
-                                <td>
-                                  <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">X</span>
-                                  </button>
-                                </td>
-                            </tr>
-                            <tr class="tab">
-                                <th scope="row">Data Structures</th>
-                                <td>Charu C.Aggarwal</td>
-                                <td>Eastern Economy Edition</td><td>04/03/2023</td>
-                                <td>6</td>
-                                <td>0002</td>
-                                <td>
-                                  <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">X</span>
-                                  </button>
-                                </td>
-                            </tr>
-                            <tr class="tab">
-                                <th scope="row">Artificial Intelligence</th>
-                                <td>Charles E.Leiserson  </td>
-                                <td>springer</td><td>11/10/2023</td>
-                                <td>10</td>
-                                <td>0003</td>
-                                <td>
-                                  <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">X</span>
-                                  </button>
-                                </td>
-                            </tr>
-                            <tr class="tab">
-                                <th scope="row"> Compiler Design</th>
-                                <td>Charu C.Aggarwal</td>
-                                <td>springer</td><td>15/10/2022</td>
-                                <td>15</td>
-                                <td>0004</td>
-                                <td>
-                                  <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">X</span>
-                                  </button>
-                                </td>
-                            </tr>
-                            <tr class="tab">
-                                <th scope="row"> Introduction to c</th>
-                                <td>Leiserson</td>
-                                <td>springer</td><td>15/10/2022</td>
-                                <td>556</td>
-                                <td>0005</td>
-                                <td>
-                                  <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">X</span>
-                                  </button>
-                                </td>
-                            </tr>
-                            <tr class="tab">
-                                <th scope="row">Introduction to c++</th>
-                                <td>Benjamin</td>
-                                <td>pearson</td><td>10/10/2022</td>
-                                <td>7</td>
-                                <td>0006</td>
-                                <td>
-                                  <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">X</span>
-                                  </button>
-                                </td>
-                            </tr>
-                            <tr class="tab">
-                                <th scope="row">algorithm analysis and design</th>
-                                <td>Reema thareja</td>
-                                <td>oxford</td><td>10/10/2012</td>
-                                <td>3</td>
-                                <td>0007</td>
-                                <td>
-                                  <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">X</span>
-                                  </button>
-                                </td>
-                            </tr>
-                            <tr class="tab">
-                                <th scope="row"> Introduction to java</th>
-                                <td>Y. Daniel</td>
-                                <td>technical publications</td><td>12/02/2024</td>
-                                <td>277</td>
-                                <td>0008</td>
-                                <td>
-                                  <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">X</span>
-                                  </button>
-                                </td>
-                            </tr>
-                            <tr class="tab">
-                                <th scope="row"> Operating System Concepts</th>
-                                <td> Archier J Harris</td>
-                                <td>Schum's Outlines</td><td>10/09/2023</td>
-                                <td>11</td>
-                                <td>0009</td>
-                                <td>
-                                  <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">X</span>
-                                  </button>
-                                </td>
-                            </tr>
-                            <tr class="tab">
-                              <th scope="row">Object Oriented Python</th>
-                              <td> Steven F. Lott</td>
-                              <td>Schum's Outlines</td><td>12/07/2023</td>
-                              <td>10</td>
-                              <td>0010</td>
-                              <td>
-                                <button type="button" class="close" aria-label="Close">
-                                  <span aria-hidden="true">X</span>
+                             <td>{{ book.Title }}</td>
+                             <td>{{ book.Name_of_Author }}</td>
+                             <td>{{ book.Publisher }}</td>
+                             <td>{{ book.Arrival_date }}</td>
+                             <td>{{ book.No_Of_Copies_Available  }}</td>
+                             <td>
+                              <button type="button" class="close" aria-label="Close" onclick="removeBook(this)">
+                                <span aria-hidden="true">&times;</span>
+                 
                                 </button>
                               </td>
                           </tr>
+                          {% endfor %}                       
                         </tbody>
                     </table>
                 </div>
@@ -216,97 +151,11 @@
     </section>
     
 </body>
-<script>
-  $(document).ready(function(){
-
-    // insertion_section
-       $("input").focus(function() {
-           $(this).css("opacity",1)
-       })
-       $("input").blur(function() {
-           $(this).css("opacity",.2)
-       })
-   
-       // close tr event
-       $(".close").click(function(){
-           $(this).parents(".tab").hide(500)
-       })
-   
-       // add book info
-       $("#add").click(function(){
-           let book_name = $("#bookName").val(),
-               book_author = $("#authorName").val(),
-               book_publisher = $("#publisherName").val(),
-               book_doa = $("#doa").val(),
-               book_number = $("#numberPage").val(),
-               book_serial = $("#serialNumber").val(),
-               new_tr = document.createElement("tr"),
-               new_th_book_name = document.createElement("th"),
-               new_th_book_author = document.createElement("td"),
-               new_th_book_publisher = document.createElement("td"),
-               new_th_book_doa = document.createElement("td"),
-               new_th_book_page = document.createElement("td"),
-               new_th_book_serial = document.createElement("td"),
-               table_book_name = document.createTextNode(book_name),
-               table_book_author = document.createTextNode(book_author),
-               table_book_publisher = document.createTextNode(book_publisher),
-               table_book_doa = document.createTextNode(book_doa),
-               table_book_number = document.createTextNode(book_number),
-               table_book_serial = document.createTextNode(book_serial);
-   
-           // add txt
-           new_th_book_name.appendChild(table_book_name);
-           new_th_book_author.appendChild(table_book_author);
-           new_th_book_publisher.appendChild(table_book_publisher);
-           new_th_book_doa.appendChild(table_book_doa);
-           new_th_book_page.appendChild(table_book_number);
-           new_th_book_serial.appendChild(table_book_serial);
-           
-   
-           // add new_tr --> td
-           let name_tab = new_tr.appendChild(new_th_book_name);
-           let author_tab = new_tr.appendChild(new_th_book_author);
-           let publisher_tab = new_tr.appendChild(new_th_book_publisher);
-           let doa_tab = new_tr.appendChild(new_th_book_doa);
-           let page_tab = new_tr.appendChild(new_th_book_page);
-           let serial_tab = new_tr.appendChild(new_th_book_serial);
-           new_th_book_name.setAttribute("scope","row")
-   
-           // add new_tr --> table
-           let new_table = document.getElementById("tabs");
-           new_table.appendChild(new_tr);
-           new_tr.setAttribute("class","tab");
-           
-   
-           // close button
-           let but_td = document.createElement("td"),
-               but = document.createElement("button"),
-               but_span = document.createElement("span"),
-               span_txt = document.createTextNode("X");
-   
-           but_td.appendChild(but);
-           but.appendChild(but_span);
-           but_span.appendChild(span_txt);
-           new_tr.appendChild(but_td);
-   
-           but.setAttribute("type","button");
-           but.setAttribute("class","close");
-           but.setAttribute("aria-label","Close");
-           but_span.setAttribute("aria-hidden","true");
-   
-           // click --> form reset
-           this.form.reset();
-   
-           // close form item
-           $(".close").click(function(){
-               $(this).parents(".tab").hide(500)
-   
-           })
-   
-           
-       })
-       
-   })
-   
+<script> 
+     // JavaScript function to remove a book
+     function removeBook(button) {
+        var row = button.closest('tr');
+        row.remove();
+    }
 </script>
 </html>

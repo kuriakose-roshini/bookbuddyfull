@@ -22,7 +22,7 @@ class Reader(models.Model):
 
 
 class Book(models.Model):
-    No=models.CharField(max_length=30)
+   # No=models.CharField(max_length=30)
     Title=models.CharField(max_length=200) 
     Name_of_Author=models.CharField(max_length=200)
     Publisher=models.CharField(max_length=250)
@@ -125,3 +125,34 @@ class LibraryItem(models.Model):
             fine_amount = 0
         return fine_amount
 
+#message notification
+#lass Invoice(models.Model):
+#   customer = models.ForeignKey(User, on_delete=models.CASCADE)
+#   amount = models.DecimalField(max_digits=10, decimal_places=2)
+#   due_date = models.DateField()
+#   def is_due_date_approaching(invoice, days_threshold=7):
+#      today = timezone.now().date()
+#      return (invoice.due_date - today).days <= days_threshold
+#
+#
+#fine calculation
+#
+#lass Book(models.Model):
+#   title = models.CharField(max_length=100)
+    #author = models.CharField(max_length=100)
+    # Add other book information
+
+#class BorrowedBook(models.Model):
+#    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+#    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+#    borrowed_date = models.DateField(default=timezone.now)
+#    due_date = models.DateField()
+#
+#    @property
+#    def calculate_fine(self):
+#        if self.due_date < timezone.now().date():
+#            days_overdue = (timezone.now().date() - self.due_date).days
+#            fine = days_overdue * 0.50  # Example: $0.50 per day
+#            return fine
+#        else:
+#            return 0
