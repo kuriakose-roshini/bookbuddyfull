@@ -75,17 +75,16 @@ button:hover{
     width: 25%;
     height: 25%;
   }
-  a:link, a:visited {
-    background-color: white;
+  .nav:link {
+    background-color: rgb(59, 124, 185);
     color: black;
-    border: 2px solid green;
+    border: 2px solid ;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
   }
   
-  a:hover, a:active {
-    background-color: rgb(28, 146, 167);
+  .nav:hover {
     color: white;
   }

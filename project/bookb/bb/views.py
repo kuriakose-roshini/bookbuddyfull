@@ -11,6 +11,9 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from .models import Customer
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+#from .models import Book
+#from .forms import BookSearchForm
 
 #from .forms import RegisterForm
 
@@ -107,11 +110,8 @@ def profilesett(request):
         template = loader.get_template('profilesett.html')
         return HttpResponse(template.render())   
 # def search_book(request):
-#     if request.method == 'GET':
-#         input_query = request.GET.get('searchbar', '').lower()
-#         books = Book.objects.filter(title__icontains=input_query)  # Assuming 'title' is the field to search
-#         return render(request, 'search_results.html', {'books': books})
-        #if request.method =='GET':
-                #search=request.GET.get('search')
-                #post=bb.objects.all().filter(title=search)
-                #return render(request,'searchbar.html',{'post':post})
+#    query = request.GET.get('query')
+#     results = []
+#    if query:
+#        results = Book.objects.filter(title__icontains=query) | Book.objects.filter(author__icontains=query)
+#  return render(request, 'books/book_search.html', {'query': query, 'results': results})

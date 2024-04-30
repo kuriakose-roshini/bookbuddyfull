@@ -90,6 +90,9 @@ h1{
         -o-background-size: auto ; 
     }
 }
+h3{
+    color: aliceblue;
+}
 /*
 button{
     border-radius: 20px;
