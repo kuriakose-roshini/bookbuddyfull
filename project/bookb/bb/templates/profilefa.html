@@ -77,26 +77,30 @@
                 <i class="fa fa-pen fa-xs edit"></i>
                 <table>
                     <tbody>
-                        <tr>
+                       <!-- <tr>
                             <td>Name</td>
                             <td>:</td>
-                            <td>xxxxxxxe</td>
+                            <td>{{ user.name }}</td>
                         </tr>
                         <tr>
                             <td>Email</td>
                             <td>:</td>
-                            <td>blahblah@gmail.com</td>
+                            <td>{{ user.email }}</td>
                         </tr>
                         <tr>
-                            <td>Membership ID</td>
+                            <td>Username</td>
                             <td>:</td>
-                            <td>ABCD1234</td>
-                        </tr>
-                        <tr>
+                            <td>{{ user.username }}</td>
+                        </tr>-->
+                        <!--<tr>
                             <td>DEPARTMENT</td>
                             <td>:</td>
                             <td>CSE</td>
-                        </tr>
+                        </tr>-->
+                        <tr><td>Name : {{ user.name }}</td></tr>
+                        <tr><td>Username : {{ user.username }}</td></tr>
+                        <tr><td>Email : {{ user.email }}<td></tr>
+
                     </tbody>
                 </table>
             </div>

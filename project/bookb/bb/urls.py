@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import include,path
 from . import views
+from .views import profile
 #from .views import listBook
 
 urlpatterns = [

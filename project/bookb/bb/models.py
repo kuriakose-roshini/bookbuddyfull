@@ -9,6 +9,7 @@ from django.dispatch import receiver
 #from PIL import Image
 from django.contrib.auth.models import User
 from django.contrib.auth.base_user import BaseUserManager
+from django.utils import timezone
 
 # Create your models here.
 class Reader(models.Model):
@@ -100,4 +101,27 @@ class Customer(models.Model):
     updated_at = models.DateTimeField(auto_now = True)    
     def __str__(self):
         return self.name
+    
+#profile
+class Profile(models.Model):
+    name = models.CharField(max_length=100,null=False,blank=False)
+    user = models.OneToOneField(Customer, on_delete=models.CASCADE)
+    email = models.EmailField(null=True)
+
+    def __str__(self):
+        return self.user.name
+
+
+  #fine calculations
+class LibraryItem(models.Model):
+    title = models.CharField(max_length=100)
+    due_date = models.DateField()
+
+    def calculate_fine(self):
+        overdue_days = (timezone.now().date() - self.due_date).days
+        if overdue_days > 14:
+            fine_amount = overdue_days - 14  # Fine is 1 rupee per day after 14 days
+        else:
+            fine_amount = 0
+        return fine_amount
 
