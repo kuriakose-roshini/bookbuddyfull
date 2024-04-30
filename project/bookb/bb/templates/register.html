@@ -92,13 +92,40 @@
         .btn-primary:hover {
             background-color: #0056b3;
         }
+        .Guide{
+            float: right;
+            background-color: none;
+            color: rgb(34, 88, 134);
+            width: 40%;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: larger;
+          }
+          .nav:link, a:visited {
+                 background-color: white;
+         color: black;
+         border: 2px solid ;
+         padding: 10px 20px;
+         text-align: center;
+         text-decoration: none;
+         display: inline-block;
+          }
+          .nav:hover, a:active {
+            background-color: rgb(28, 146, 167);
+            color: white;
+          }
     </style>
 </head>
 <body>
-
-
-
-
+        <a class="nav" href="{% url 'index' %}">Home</a>
+<div class="Guide">
+    <h3>Guidelines</h3>
+    <ul>
+      <li>A member can keep only 3 books at a time.</li>
+      <li>Books should be returned before due date.</li>
+      <li>Due date is 14 days from request date.</li>
+      <li>After due date,fine will be charged.</li>
+    </ul>
+  </div>   
     {% if messages %}
 
     <div class="message-container" style="  background: #fff;

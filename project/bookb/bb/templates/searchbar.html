@@ -5,7 +5,6 @@
 	<title>Book Buddy</title>
 	<link rel="icon" type="image/x-icon" href="{% static 'images/logo.png' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-	<script src="{% static 'bb/js/script.js' %}"></script>
 </head>
 <body>
 <h2 style="padding-left: 30px;">Find your favourite book    
@@ -17,21 +16,23 @@
         {% endfor %}
     </ul>
     {% comment "" %}
-<div class="container">			
-   <ul id='list'>
-      <li class="books">Artificial Intelligence</li>
-      <li class="books">Automata Theory</li>
-      <li class="books">Computer vision</li>
-      <li class="books">Introduction to Algorithms</li>
-      <li class="books">Data Structures</li>
-      <li class="books">API</li>
-  </ul>
+      <h1>Book Search</h1>
+    <form method="GET">
+        {{ form.as_p }}
+        <button type="submit">Search</button>
+    </form>
+    {% if query %}
+        <h2>Results for '{{ query }}'</h2>
+        <ul>
+            {% for book in results %}
+                <li>{{ book.title }} by {{ book.author }}</li>
+            {% empty %}
+                <li>No results found.</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
 </div>{% endcomment %}
 </body>
-<script>
-    function searchBook() {
-        var input = document.getElementById('searchbar').value.toLowerCase();
-        window.location.href = '/search_book/?searchbar=' + input;
-    }
-</script>
 </html>
