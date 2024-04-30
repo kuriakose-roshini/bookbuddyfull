@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="{% static 'css/mngmem.css' %}">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <!-- JQuery -->
@@ -26,268 +26,105 @@
     <link rel="stylesheet" href="mngmem.css">
     <link rel="stylesheet" href="/CSS/book_list.css">
     <link rel="stylesheet" href="/CSS/insertion_section.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS */
+        #mem_list {
+            margin-top: 20px;
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #ffff;
+        }
+        .close {
+            cursor: pointer;
+        }
+        .close:hover {
+            color: red;
+        }
+    </style>
 </head>
 <body>
-  
-    <section id="one-page">
-        <div class="container">
-            <!-- Title -->
-            
-            <div class="row">
-                <h1 class="text-light">Book Buddy</h1><br>
-                <h3>Member Management</h3>
-            </div>
-              {#{% for r in reader %} #}
-            <div class="row mt-4">
-                <!-- insertion section -->
-                
-                <div class="col-lg-5" id="insertion_section">
-                    <form class="form-group justify-content-center">
-                        <div class="row" id="name-section">
-                            <label for="name" class="text-light">Name</label>
-                            <input type="text" class="form-control" id="name">
-                        </div>
-                       <!-- <div class="row" id="type-section">
-                            <label for="typeName" class="text-light">Member Type</label>
-                            <input type="text" class="form-control" id="typeName">
-                        </div> -->
-                        <div class="row" id="idno-section">
-                            <label for="idnumber" class="text-light">Id</label>
-                            <input type="text" class="form-control" id="idnumber">
-                        </div>
-                        <div class="row" id="two-section">
-                           <!-- <div class="col-6">
-                                <label for="deptname" class="text-light">Department</label>
-                                <input type="text" class="form-control" id="deptname">
-                            </div>-->
-                            <div class="col-6">
-                                <label for="Due" class="text-light">Due</label>
-                                <input type="text" class="form-control" id="due">
-                            </div>
-                        </div>
-                        <div class="add-button mt-4">
-                            <button type="button" class="btn btn-danger btn-block" id="add" >ADD</button>
-                            
-                        </div>
-                            <a class="btn btn-danger btn-block" href="{% url 'mngbook' %}">Manage Book</a>
-                      </form>
-                </div>
 
-                <!-- Book List -->
-                <div class="col-lg-7" id="mem_list">
-                    <table class="table table-borderless table-striped mt-3 ">
-                        <thead>
-                            <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Member Type</th>
-                                <th scope="col">Membership Id</th>
-                                <th scope="col">Department</th>
-                                <th scope="col">Due</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabs">
-                            <tr class="tab">
-                                <th scope="row">Athira </th>
-                                <td>Student</td>
-                                <td>S1001</td>
-                                <td>CSE</td>
-                                <td>No</td>
-                                <td>
-                                  <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">X</span>
+<section id="one-page">
+    <div class="container">
+        <!-- Title -->
+        <div class="row">
+            <h1 class="text-light">Book Buddy</h1><br>
+            <h3>Member Management</h3>
+        </div>
+
+        <!-- mngmem.html -->
+
+<div class="col-lg-5">
+  <form action="" id="RegForm" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-floating">
+          <input type="text" class="form-control" id="name" placeholder="Name" name="name" required>
+          <label for="name">Name</label>
+      </div>
+      <div class="form-floating">
+          <input type="text" class="form-control" id="username" placeholder="Username" name="username" required>
+          <label for="username">Username</label>
+      </div>
+      <div class="form-floating">
+          <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
+          <label for="email">Email</label>
+      </div>
+      <div class="form-floating">
+          <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
+          <label for="password">Password</label>
+      </div>
+      <div class="add-button mt-4">
+          <button type="submit" name="ADD" class="btn btn-danger btn-block" id="add">ADD</button>
+      </div>
+      <a class="btn btn-danger btn-block" href="{% url 'mngbook' %}">Manage Book</a>
+  </form>
+</div>
+
+
+            <!-- Book List -->
+            <div class="col-lg-7">
+              <div class="container">
+                  <table class="table table-borderless table-striped mt-3" id="mem_list" style="background-color: white;" border="2">
+                      <thead>
+                          <tr>
+                              <th scope="col">Name</th>
+                              <th scope="col">Username</th>
+                              <th scope="col">Email</th>
+                              <th scope="col">Due</th>
+                              <th></th>
+                          </tr>
+                      </thead>
+                      <tbody id="tabs">
+                          {% for reader in reader %}
+                          <tr class="tab">
+                              <td>{{ reader.name }}</td>
+                              <td>{{ reader.user.username }}</td>
+                              <td>{{ reader.user.email }}</td>
+                              <td>Due Date Here</td>
+                              <td>
+                                  <button type="button" class="close" aria-label="Close" onclick="removeReader(this)">
+                                      <span aria-hidden="true">&times;</span>
                                   </button>
-                                </td>
-                            </tr>
-                            <tr class="tab">
-                                <th scope="row">Luna</th>
-                                <td>Student</td>
-                                <td>S1002</td>
-                                <td>CSE</td>
-                                <td>Yes</td>
-                                <td>
-                                  <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">X</span>
-                                  </button>
-                                </td>
-                            </tr>
-                            <tr class="tab">
-                                <th scope="row">Nimisha</th>
-                                <td>Faculty</td>
-                                <td>F11005</td>
-                                <td>CSE</td>
-                                <td>No</td>
-                                <td>
-                                  <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">X</span>
-                                  </button>
-                                </td>
-                            </tr><!--
-                            <tr class="tab">
-                                <th scope="row">Pride and Prejudice</th>
-                                <td>Jane Austen</td>
-                                <td>Sky</td>
-                                <td>425</td>
-                                <td>4</td>
-                                <td>
-                                  <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">X</span>
-                                  </button>
-                                </td>
-                            </tr>
-                            <tr class="tab">
-                                <th scope="row">Twilight</th>
-                                <td>Stephenie Meyer</td>
-                                <td>Sun</td>
-                                <td>556</td>
-                                <td>5</td>
-                                <td>
-                                  <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">X</span>
-                                  </button>
-                                </td>
-                            </tr>
-                            <tr class="tab">
-                                <th scope="row">The Book Thief</th>
-                                <td>Markus Zusak</td>
-                                <td>Child</td>
-                                <td>475</td>
-                                <td>6</td>
-                                <td>
-                                  <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">X</span>
-                                  </button>
-                                </td>
-                            </tr>
-                            <tr class="tab">
-                                <th scope="row">Narnia</th>
-                                <td>C.S. Lewis</td>
-                                <td>Alfa</td>
-                                <td>358</td>
-                                <td>7</td>
-                                <td>
-                                  <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">X</span>
-                                  </button>
-                                </td>
-                            </tr>
-                            <tr class="tab">
-                                <th scope="row">Animal Farm</th>
-                                <td>George Orwell</td>
-                                <td>Dog</td>
-                                <td>277</td>
-                                <td>8</td>
-                                <td>
-                                  <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">X</span>
-                                  </button>
-                                </td>
-                            </tr>
-                            <tr class="tab">
-                                <th scope="row">Les Misérables</th>
-                                <td>Victor Hugo</td>
-                                <td>Dog</td>
-                                <td>369</td>
-                                <td>9</td>
-                                <td>
-                                  <button type="button" class="close" aria-label="Close">
-                                    <span aria-hidden="true">X</span>
-                                  </button>
-                                </td>
-                            </tr>-->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div> 
-    </section>
-</body>
+                              </td>
+                          </tr>
+                          {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          
+        </div>
+    </div>
+</section>
+
 <script>
-  $(document).ready(function(){
+    // JavaScript function to remove a reader
+    function removeReader(button) {
+        var row = button.closest('tr');
+        row.remove();
+    }
+</script>
 
-    // insertion_section
-       $("input").focus(function() {
-           $(this).css("opacity",1)
-       })
-       $("input").blur(function() {
-           $(this).css("opacity",.2)
-       })
-   
-       // close tr event
-       $(".close").click(function(){
-           $(this).parents(".tab").hide(500)
-       })
-   
-       // add book info
-       $("#add").click(function(){
-           let mem_name = $("#memName").val(),
-               mem_type = $("#typeName").val(),
-               mem_id = $("#idno").val(),
-               mem_dept = $("#deptname").val(),
-               mem_due = $("#due").val(),
-               new_tr = document.createElement("tr"),
-               new_th_mem_name = document.createElement("th"),
-               new_th_mem_type = document.createElement("td"),
-               new_th_mem_id = document.createElement("td"),
-               new_th_mem_dept = document.createElement("td"),
-               new_th_mem_due = document.createElement("td"),
-               table_mem_name = document.createTextNode(mem_name),
-               table_mem_type = document.createTextNode(mem_type),
-               table_mem_id = document.createTextNode(mem_id),
-               table_mem_dept = document.createTextNode(mem_dept),
-               table_mem_due = document.createTextNode(mem_due);
-   
-           // add txt
-           new_th_mem_name.appendChild(table_mem_name);
-           new_th_mem_type.appendChild(table_mem_type);
-           new_th_mem_id.appendChild(table_mem_id);
-           new_th_mem_dept.appendChild(table_mem_dept);
-           new_th_mem_due.appendChild(table_mem_due);
-           
-   
-           // add new_tr --> td
-           let name_tab = new_tr.appendChild(new_th_mem_name);
-           let type_tab = new_tr.appendChild(new_th_mem_type);
-           let id_tab = new_tr.appendChild(new_th_mem_id);
-           let dept_tab = new_tr.appendChild(new_th_mem_dept);
-           let due_tab = new_tr.appendChild(new_th_mem_due);
-           new_th_mem_name.setAttribute("scope","row")
-   
-           // add new_tr --> table
-           let new_table = document.getElementById("tabs");
-           new_table.appendChild(new_tr);
-           new_tr.setAttribute("class","tab");
-           
-   
-           // close button
-           let but_td = document.createElement("td"),
-               but = document.createElement("button"),
-               but_span = document.createElement("span"),
-               span_txt = document.createTextNode("X");
-   
-           but_td.appendChild(but);
-           but.appendChild(but_span);
-           but_span.appendChild(span_txt);
-           new_tr.appendChild(but_td);
-   
-           but.setAttribute("type","button");
-           but.setAttribute("class","close");
-           but.setAttribute("aria-label","Close");
-           but_span.setAttribute("aria-hidden","true");
-   
-           // click --> form reset
-           this.form.reset();
-   
-           // close form item
-           $(".close").click(function(){
-               $(this).parents(".tab").hide(500)
-   
-           })
-   
-           
-       })
-       
-   })
-
-</script> 
+</body>
 </html>

@@ -110,14 +110,63 @@ def listBook(request):
         return render(request,'list.html',dict_books )            
 def mngbook(request):
         template = loader.get_template('mngbook.html')
-        return HttpResponse(template.render())   
+        return HttpResponse(template.render())  
+
+
+
 def mngmem(request):
-        dict_reader={
-                'reader':Reader.objects.all()
-        }
-        template = loader.get_template('mngmem.html')
-        return render(request, 'mngmem.html',dict_reader)
-       # return HttpResponse(template.render()) 
+        reader = Customer.objects.all()
+       
+
+
+        try:
+                if request.POST and "ADD" in request.POST:
+                        name = request.POST.get('name')
+                        username = request.POST.get('username')
+                        email = request.POST.get('email')
+                        password = request.POST.get('password')
+                        print(name)
+                        print(username)
+                        print(email)
+
+                        user = User.objects.create_user(
+                                username=username,
+                                email=email,
+                                password=password,
+                                first_name=name  # Use first_name instead of name
+                        )
+                        
+                        
+                     
+
+                        customer = Customer.objects.create(
+                                user = user,
+                                name = name,
+                                
+                                )
+
+
+      
+            
+        
+            
+        except IntegrityError as e:
+                print(f"IntegrityError: {e}")
+                error_message = "Duplicate username or invalid input data"
+                print(error_message)
+                messages.error(request,error_message)
+
+       
+ 
+
+
+
+
+
+
+       
+        return render(request, 'mngmem.html',{'reader':reader})
+       
 @login_required  
 def profile(request):
     return render(request, 'profilefa.html')
@@ -138,3 +187,7 @@ def search_book(request):
 def item(request):
         fine = item.calculate_fine()
         print("Fine for {item.title}: {fine} rupees")
+
+
+
+
