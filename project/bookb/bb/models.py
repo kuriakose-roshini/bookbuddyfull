@@ -25,11 +25,24 @@ class Book(models.Model):
     Title=models.CharField(max_length=200) 
     Name_of_Author=models.CharField(max_length=200)
     Publisher=models.CharField(max_length=250)
-    Arrival_date=models.DateField()
+    Arrival_date=models.DateField()  
     No_Of_copies_Available=models.CharField(max_length=30,null=False)
        
     def __str__(self):
            return self.Title
+     # models.py
+
+
+# class Book(models.Model):
+#     title = models.CharField(max_length=200)
+#     Name_of_Author = models.CharField(max_length=200)
+#     Publisher=models.CharField(max_length=250)
+#     No_Of_copies_Available=models.CharField(max_length=30,null=False)
+#     #description = models.TextField()
+#     #published_date = models.DateField()
+
+#     def _str_(self):
+#         return self.title
 
      
     #class Meta:

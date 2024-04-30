@@ -18,4 +18,8 @@ urlpatterns = [
     path('profile/', views.profile, name="profilefa"),
     path('profile:settings/', views.profilesett, name="profilesett"),
     #path('books/',views.listBook,name='listBook'),
+    #path('search/', views.search_book, name='search_book'),
+  
+
+
     ]

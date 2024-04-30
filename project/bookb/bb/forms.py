@@ -4,6 +4,11 @@ from django.contrib.auth.models import User
 
 class BookSearchForm(forms.Form):
   query = forms.CharField(label='Search')
+
+  
+
+#class BookSearchForm(forms.Form):
+ #  search_query = forms.CharField(max_length=100, required=False, label='Search')
 #class RegisterForm(UserCreationForm):
 #name = forms .CharField(max_length=50,required=False)
 

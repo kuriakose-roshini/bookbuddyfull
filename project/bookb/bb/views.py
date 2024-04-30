@@ -14,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Book
 from .forms import BookSearchForm
+from django.http import JsonResponse
 
 #from .forms import RegisterForm
 
@@ -62,9 +63,7 @@ def Register(request):
                     password = password,
                     email = email,
                 )
-        
-           
-
+            
             customer = Customer.objects.create(
                     user = user,
                     name = name,
@@ -109,9 +108,24 @@ def profile(request):
 def profilesett(request):
         template = loader.get_template('profilesett.html')
         return HttpResponse(template.render())   
+
+
+#  def search_book(request):
+# #    query = request.GET.get('query')
+#     results = []
+#   if query:
+#         results = Book.objects.filter(title__icontains=query) | Book.objects.filter(author__icontains=query)
+# return render(request, 'search_book.html', search_book{'query': query, 'results': results})
+
 def search_book(request):
    query = request.GET.get('query')
    results = []
    if query:
-        results = Book.objects.filter(title__icontains=query) | Book.objects.filter(author__icontains=query)
+        results = Book.objects.filter(title_icontains=query) | Book.objects.filter(author_icontains=query)
    return render(request, 'search_book.html', {'query': query, 'results': results})
+
+
+
+
+
+
