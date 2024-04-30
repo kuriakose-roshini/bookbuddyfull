@@ -14,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Book
 from .forms import BookSearchForm
+from .models import LibraryItem
 
 #from .forms import RegisterForm
 
@@ -31,6 +32,7 @@ def report(request):
         return HttpResponse(template.render()) 
 def Login(request):
     if request.POST:
+       # name = request.POST.get('name')
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(username=username,password=password)
@@ -72,6 +74,7 @@ def Register(request):
 
 
             user = User.objects.create_user(
+                    name = name,
                     username = username,
                     password = password,
                     email = email,
@@ -100,7 +103,7 @@ def Register(request):
     print("inside register")
     return render(request,'register.html')
 
-# @login_required
+@login_required
 def listBook(request):
         dict_books={
              'books':Book.objects.all()
@@ -109,17 +112,69 @@ def listBook(request):
         return render(request,'list.html',dict_books )            
 def mngbook(request):
         template = loader.get_template('mngbook.html')
-        return HttpResponse(template.render())   
+        return HttpResponse(template.render())  
+
+
+
 def mngmem(request):
-        dict_reader={
-                'reader':Reader.objects.all()
-        }
-        template = loader.get_template('mngmem.html')
-        return render(request, 'mngmem.html',dict_reader)
-       # return HttpResponse(template.render())   
+        reader = Customer.objects.all()
+       
+
+
+        try:
+                if request.POST and "ADD" in request.POST:
+                        name = request.POST.get('name')
+                        username = request.POST.get('username')
+                        email = request.POST.get('email')
+                        password = request.POST.get('password')
+                        print(name)
+                        print(username)
+                        print(email)
+
+                        user = User.objects.create_user(
+                                username=username,
+                                email=email,
+                                password=password,
+                                first_name=name  # Use first_name instead of name
+                        )
+                        
+                        
+                     
+
+                        customer = Customer.objects.create(
+                                user = user,
+                                name = name,
+                                
+                                )
+
+
+      
+            
+        
+            
+        except IntegrityError as e:
+                print(f"IntegrityError: {e}")
+                error_message = "Duplicate username or invalid input data"
+                print(error_message)
+                messages.error(request,error_message)
+
+       
+ 
+
+
+
+
+
+
+       
+        return render(request, 'mngmem.html',{'reader':reader})
+       
+@login_required  
 def profile(request):
-        template = loader.get_template('profilefa.html')
-        return HttpResponse(template.render())   
+    return render(request, 'profilefa.html')
+#def profile(request):
+ #       template = loader.get_template('profilefa.html')
+  #      return HttpResponse(template.render())   
 def profilesett(request):
         template = loader.get_template('profilesett.html')
         return HttpResponse(template.render())   
