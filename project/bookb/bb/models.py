@@ -27,7 +27,9 @@ class Book(models.Model):
     Publisher=models.CharField(max_length=250)
     Arrival_date=models.DateField()
     No_Of_copies_Available=models.CharField(max_length=30,null=False)
-     
+       
+    def __str__(self):
+           return self.Title
 
      
     #class Meta:

@@ -2,10 +2,10 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-#Īclass BookSearchForm(forms.Form):
-#    query = forms.CharField(label='Search')
+class BookSearchForm(forms.Form):
+  query = forms.CharField(label='Search')
 #class RegisterForm(UserCreationForm):
- #   name = forms .CharField(max_length=50,required=False)
+#name = forms .CharField(max_length=50,required=False)
 
   #  class Meta:
     #    model = User
