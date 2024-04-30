@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import include,path
 from . import views
+from .views import profile
 #from .views import listBook
 
 urlpatterns = [
@@ -8,7 +9,7 @@ urlpatterns = [
     
     path('about/', views.about, name="about"),
     path('register/', views.Register, name="user"),
-    #path('report/', views.report, name="report"),
+    path('report/', views.report, name="report"),
     path('login/', views.Login, name="login"),
     path('logout/', views.logout, name="logout"),
     path('searchbook/', views.search_book, name="search_book"),

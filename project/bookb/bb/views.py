@@ -14,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Book
 from .forms import BookSearchForm
+from .models import LibraryItem
 
 #from .forms import RegisterForm
 
@@ -31,6 +32,7 @@ def report(request):
         return HttpResponse(template.render()) 
 def Login(request):
     if request.POST:
+       # name = request.POST.get('name')
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(username=username,password=password)
@@ -58,6 +60,7 @@ def Register(request):
 
 
             user = User.objects.create_user(
+                    name = name,
                     username = username,
                     password = password,
                     email = email,
@@ -86,7 +89,7 @@ def Register(request):
     print("inside register")
     return render(request,'register.html')
 
-#@login_required
+@login_required
 def listBook(request):
         dict_books={
              'books':Book.objects.all()
@@ -102,10 +105,13 @@ def mngmem(request):
         }
         template = loader.get_template('mngmem.html')
         return render(request, 'mngmem.html',dict_reader)
-       # return HttpResponse(template.render())   
+       # return HttpResponse(template.render()) 
+@login_required  
 def profile(request):
-        template = loader.get_template('profilefa.html')
-        return HttpResponse(template.render())   
+    return render(request, 'profilefa.html')
+#def profile(request):
+ #       template = loader.get_template('profilefa.html')
+  #      return HttpResponse(template.render())   
 def profilesett(request):
         template = loader.get_template('profilesett.html')
         return HttpResponse(template.render())   
@@ -115,3 +121,8 @@ def search_book(request):
    if query:
         results = Book.objects.filter(title__icontains=query) | Book.objects.filter(author__icontains=query)
    return render(request, 'search_book.html', {'query': query, 'results': results})
+
+#fine calculations
+def item(request):
+        fine = item.calculate_fine()
+        print("Fine for {item.title}: {fine} rupees")
