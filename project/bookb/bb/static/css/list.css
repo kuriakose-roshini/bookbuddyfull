@@ -12,7 +12,11 @@ table,th{
     width: 1000px;
     text-align: center;
     font-size: larger;
+<<<<<<< HEAD
     background-color: #cff2f761;
+=======
+    background-color: #eef1f1b7;
+>>>>>>> 66f0311002b8196ee2d540221882d008ae2596a7
     position: center;
 }
 td{
@@ -21,7 +25,7 @@ td{
     width: 1500px;
     text-align: center;
     font-size: larger;
-    background-color: #1bbcd175;
+    background-color: #eef1f1b7;
 }
 button{
     display: inline-block;
@@ -75,7 +79,7 @@ button:hover{
     width: 25%;
     height: 25%;
   }
-  .nav:link {
+  .nav{
     background-color: rgb(59, 124, 185);
     color: black;
     border: 2px solid ;
@@ -85,6 +89,3 @@ button:hover{
     display: inline-block;
   }
   
-  .nav:hover {
-    color: white;
-  }
