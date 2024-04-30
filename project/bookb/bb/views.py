@@ -82,7 +82,7 @@ def Register(request):
     print("inside register")
     return render(request,'register.html')
 
-# @login_required
+#@login_required
 def listBook(request):
         return render(request,"list.html")            
 def mngbook(request):
