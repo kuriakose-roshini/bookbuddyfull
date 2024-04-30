@@ -124,8 +124,16 @@ def profilesett(request):
         template = loader.get_template('profilesett.html')
         return HttpResponse(template.render())   
 def search_book(request):
-   query = request.GET.get('query')
-   results = []
-   if query:
-        results = Book.objects.filter(title__icontains=query) | Book.objects.filter(author__icontains=query)
-   return render(request, 'search_book.html', {'query': query, 'results': results})
+  if request.method == 'GET':
+        form = BookSearchForm(request.GET)
+        if form.is_valid():
+            search_query = form.cleaned_data.get('search_query')
+            if search_query:
+                books = Book.objects.filter(title__icontains=search_query) | Book.objects.filter(Name_of_Author__icontains=search_query)
+            else:
+                books = Book.objects.all()
+  else:
+        form = BookSearchForm()
+        books = Book.objects.all()
+    
+  return render(request, 'search_book.html', {'form': form, 'books': books})
