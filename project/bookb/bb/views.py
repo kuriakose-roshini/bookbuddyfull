@@ -41,6 +41,18 @@ def Login(request):
             print("Inside error block")
             messages.error(request,'Invalid credentials.')
     return render(request,"login.html")
+def AdminLogin(request):
+    if request.POST:
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username,password=password)
+        if user:
+            login(request,user)
+            return redirect('mngbook')
+        else:
+            print("Inside error block")
+            messages.error(request,'Invalid credentials.')
+    return render(request,"adminlogin.html")
  
 def logout(request):
         authlogout(request)
