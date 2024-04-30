@@ -192,12 +192,3 @@ def search_book(request):
    if query:
         results = Book.objects.filter(title__icontains=query) | Book.objects.filter(author__icontains=query)
    return render(request, 'search_book.html', {'query': query, 'results': results})
-
-#fine calculations
-def item(request):
-        fine = item.calculate_fine()
-        print("Fine for {item.title}: {fine} rupees")
-
-
-
-
