@@ -58,7 +58,9 @@ def logout(request):
         authlogout(request)
         return redirect('login')     
       
-
+def loggot(request):
+        authlogout(request)
+        return redirect('index')
 def Register(request):
  
     try:
