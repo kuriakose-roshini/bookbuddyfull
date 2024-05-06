@@ -185,16 +185,6 @@ def profilesett(request):
         return HttpResponse(template.render())   
 
 
-# #fine calculation
-# from django.shortcuts import render, redirect
-# from .models import BorrowedBook
-
-# def return_book(request, borrowed_book_id):
-#     borrowed_book = BorrowedBook.objects.get(pk=borrowed_book_id)
-#     fine = borrowed_book.calculate_fine
-#     # You can add the fine to the user's account or display it on the return page
-#     return render(request, 'return_book.html', {'fine': fine})
-
 # #message notification
 # def send_due_date_notification(request):
 #     invoices = Invoice.objects.all()
@@ -217,3 +207,27 @@ def profilesett(request):
 #     response['Expires'] = '0'
 #     return response
         
+#fine calc
+from django.shortcuts import render, redirect
+from .models import BorrowedBook
+
+def return_book(request, borrowed_book_id):
+    borrowed_book = BorrowedBook.objects.get(pk=borrowed_book_id)
+    fine = borrowed_book.calculate_fine
+    # You can add the fine to the user's account or display it on the return page
+    return render(request, 'return_book.html', {'fine': fine})
+
+#search book
+from django.shortcuts import render
+from .models import Book
+
+def index(request):
+    return render(request, 'index.html')
+
+def search_books(request):
+    query = request.GET.get('q')
+    if query:
+        books = Book.objects.filter(Title__icontains=query)
+    else:
+        books = []
+    return render(request, 'index.html', {'books': books})

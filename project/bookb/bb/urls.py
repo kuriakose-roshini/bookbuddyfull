@@ -2,7 +2,8 @@ from django.contrib import admin
 from django.urls import include,path
 from . import views
 from .views import profile
-
+from django.urls import path
+from .views import index, search_books
 
 urlpatterns = [
     path('', views.index, name="index"),
@@ -22,7 +23,10 @@ urlpatterns = [
     path('profile:settings/', views.profilesett, name="profilesett"),
     #path('books/',views.listBook,name='listBook'),
     #path('search/', views.search_book, name='search_book'),
-  
+  # searching
+    path('search/', search_books, name='search_books'),
+
+
 
 
     ]

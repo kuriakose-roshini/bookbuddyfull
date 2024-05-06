@@ -10,6 +10,8 @@ from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils import timezone
+from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 class Reader(models.Model):
@@ -134,25 +136,22 @@ class LibraryItem(models.Model):
 #      today = timezone.now().date()
 #      return (invoice.due_date - today).days <= days_threshold
 #
-#
-#fine calculation
-#
-#lass Book(models.Model):
-#   title = models.CharField(max_length=100)
-    #author = models.CharField(max_length=100)
-    # Add other book information
 
-#class BorrowedBook(models.Model):
-#    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-#    book = models.ForeignKey(Book, on_delete=models.CASCADE)
-#    borrowed_date = models.DateField(default=timezone.now)
-#    due_date = models.DateField()
-#
-#    @property
-#    def calculate_fine(self):
-#        if self.due_date < timezone.now().date():
-#            days_overdue = (timezone.now().date() - self.due_date).days
-#            fine = days_overdue * 0.50  # Example: $0.50 per day
-#            return fine
-#        else:
-#            return 0
+
+#fine calc
+
+
+class BorrowedBook(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    borrowed_date = models.DateField(default=timezone.now)
+    due_date = models.DateField()
+
+    @property
+    def calculate_fine(self):
+        if self.due_date < timezone.now().date():
+            days_overdue = (timezone.now().date() - self.due_date).days
+            fine = days_overdue * 0.50  # Example: $0.50 per day
+            return fine
+        else:
+            return 0
