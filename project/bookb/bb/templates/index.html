@@ -25,19 +25,18 @@
    <form action="{% url 'search_books' %}" method="GET">
 	<input type="text" name="q" placeholder="Search books...">
 	<button type="submit">Search</button>
-</form>
-
 <!-- Display search results here -->
-{% if books %}
-<h2>Search Results:</h2>
-<ul>
-	{% for book in books %}
-	<li>{{ book.Title }} by {{ book.Name_of_Author }}</li>
-	{% endfor %}
-</ul>
-{% endif %}
+	{% if books %}
+	<h2>Search Results:</h2>
+	<ul>
+		{% for book in books %}
+		<li>{{ book.Title }} by {{ book.Name_of_Author }}</li>
+		{% endfor %}
+	</ul>
+	{% endif %}  
+</form>	
 	<!--about -->
-	{% include 'about.html' %} 
+{% include 'about.html' %} 
 	<footer>
 		<p>Copyright © 2024 Library Management System. All rights reserved.</p>
 	</footer>
