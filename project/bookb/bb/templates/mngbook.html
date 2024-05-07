@@ -87,24 +87,24 @@
     <form action="" id="RegForm" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-floating">
-            <input type="text" class="form-control" id="name" placeholder="Title" name="name" required>
-            <label for="name">Title</label>
+            <input type="text" class="form-control" id="title" placeholder="Title" name="title" required>
+            <label for="title">Title</label>
         </div>
         <div class="form-floating">
-            <input type="text" class="form-control" id="username" placeholder="Author" name="username" required>
-            <label for="username">Author</label>
+            <input type="text" class="form-control" id="name of author" placeholder="Name_of_Author" name="name of author" required>
+            <label for="name of author">Name_of_Author</label>
         </div>
         <div class="form-floating">
-            <input type="email" class="form-control" id="email" placeholder="Publisher" name="email" required>
-            <label for="email">Publisher</label>
+            <input type="text" class="form-control" id="publisher" placeholder="Publisher" name="publisher" required>
+            <label for="publisher">Publisher</label>
         </div>
         <div class="form-floating">
-            <input type="password" class="form-control" id="password" placeholder="Arrival Date" name="password" required>
-            <label for="password">Arrival Date</label>
+            <input type="date" class="form-control" id="arrival date" placeholder="Arrival Date" name="arrival date" required>
+            <label for="arrival date">Arrival Date</label>
         </div>
         <div class="form-floating">
-            <input type="password" class="form-control" id="password" placeholder="No of copies available" name="password" required>
-            <label for="password">No of copies Available</label>
+            <input type="text" class="form-control" id="no of copies available" placeholder="No of copies available" name="no of copies available" required>
+            <label for="no of copies available">No of copies Available</label>
         </div>
                         <div class="add-button mt-4">
                             <button type="button" class="btn btn-danger btn-block" id="add" >ADD</button>
@@ -123,7 +123,7 @@
                                 <th scope="col">Publisher</th>
                                 <th scope="col">Arrival_Date</th>
                                 <th scope="col">No_Of_Copies_Available</th>
-                                <th scope="col">number</th>
+                               <!-- <th scope="col">number</th>-->
                                 <th></th>
                             </tr>
                         </thead>

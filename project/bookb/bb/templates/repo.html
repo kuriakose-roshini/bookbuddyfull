@@ -21,7 +21,7 @@
 </nav>
 <h2 class="chart-title">
   <small id="chart-figure-type" class="type" style="color: blue;">Total Number Of Books:</small>
-  <span id="chart-figure" class="figure">30</span>
+  <span id="chart-figure" class="figure">10</span>
 </h2>
 <div id="chartdiv"></div>
 <div class="barchart-wrapper">
@@ -88,7 +88,7 @@ function am4themes_cs(target) {
 
 am4core.useTheme(am4themes_cs);
 
-var data = [
+/*var data = [
   {
     id: 10001,
     name: "Most taken books by members",
@@ -112,7 +112,35 @@ var data = [
     ]
   },
   
+];*/
+
+
+var data = [
+  {
+    id: 10001,
+    name: "Most taken books by members",
+    count: 3,
+    children: [
+      { id: 10002, name: "Introduction to Algorithms", count: 7 },
+      { id: 10003, name: "Data Structures", count: 3 },
+      { id: 10004, name: "Artificial Intelligence", count: 5 },
+    ]
+  },
+  {
+    id: 10005,
+    name: "Most taken books of the month",
+    count: 5,
+    children: [
+     { id: 10006, name: "Introduction to Java", count: 4 },
+      { id: 10007, name: "Compiler Design", count: 7 },
+      { id: 10008, name: "Introduction to C", count: 7 },
+      { id: 10009, name: "Introduction to C++", count: 10 },
+      { id: 10010, name: "Algorithm Analysis and Design", count: 8 },
+    ]
+  },
+  
 ];
+
 
 // create chart
 var piechart = am4core.create("chartdiv", am4charts.PieChart);
