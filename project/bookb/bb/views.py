@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from .models import Reader
 from .models import Book
 from . import forms
+from django.urls import reverse
 from django.db import IntegrityError
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
@@ -107,11 +108,9 @@ def Register(request):
 
 @login_required
 def listBook(request):
-        dict_books={
-             'books':Book.objects.all()
-         }
+      
         #books=Book.objects.all()
-        return render(request,'list.html',dict_books )            
+        return render(request,'list.html')            
 def mngbook(request):
         template = loader.get_template('mngbook.html')
         return HttpResponse(template.render())  
@@ -129,11 +128,11 @@ def mngbook(request):
                         print(Arrival_date)
                         print(No_Of_Copies_Available)
 
-                        Book=book.objects.create_book(
+                        book = Book.objects.create_book(
                                 Title=Title,
                                 Name_of_Author=Name_of_Author,
                                 Publisher=Publisher,
-                                Arrival_date=Arrival_date # Use first_name instead of name
+                                Arrival_date=Arrival_date ,# Use first_name instead of name
                         )              
                                   
         except IntegrityError as e:
@@ -197,15 +196,16 @@ def profilesett(request):
 
 #logout
 # views.py
-# from django.contrib.auth import logout
-# from django.shortcuts import redirect
-# def logout_view(request):
-#     logout(request)
-#     response = redirect('login')  # Redirect to your login page
-#     response['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-#     response['Pragma'] = 'no-cache'
-#     response['Expires'] = '0'
-#     return response
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+def logout_view(request):
+     logout(request)
+     return redirect(reverse('login'))
+     #response = redirect('login')  # Redirect to your login page
+     #response['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+     #response['Pragma'] = 'no-cache'
+     #response['Expires'] = '0'
+     #return response
         
 #fine calc
 from django.shortcuts import render, redirect
@@ -220,9 +220,6 @@ def return_book(request, borrowed_book_id):
 #search book
 from django.shortcuts import render
 from .models import Book
-
-def index(request):
-    return render(request, 'index.html')
 
 def search_books(request):
     query = request.GET.get('q')

@@ -14,7 +14,7 @@ urlpatterns = [
     path('login/', views.Login, name="login"),
     path('logout/', views.loggot, name="Logout"),
     path('adminlogin/', views.AdminLogin, name="adminlogin"),
-    path('logout/', views.logout, name="logout"),
+    path('logout/', views.logout_view, name="logout"),
     #path('searchbook/', views.search_book, name="search_book"),
     path('listbook/', views.listBook, name="list"),
     path('managebook/', views.mngbook, name="mngbook"),
@@ -22,8 +22,6 @@ urlpatterns = [
     path('profile/', views.profile, name="profilefa"),
     path('profile:settings/', views.profilesett, name="profilesett"),
     #path('books/',views.listBook,name='listBook'),
-    #path('search/', views.search_book, name='search_book'),
-  # searching
     path('search/', search_books, name='search_books'),
 
 

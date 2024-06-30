@@ -51,7 +51,7 @@
                 <h3>Book Management</h3>
             </div>
             <a class="nav" href="{% url 'Logout' %}">Logout</a>
-            <div class="row mt-4">
+            <!--<div class="row mt-4">-->
                 <!-- insertion section --><!--
                 <div class="col-lg-5" id="insertion_section">
                     <form class="form-group justify-content-center">
@@ -106,16 +106,17 @@
             <input type="text" class="form-control" id="No_Of_Copies_Available" placeholder="No of copies available" name="No_Of_Copies_Available" required>
             <label for="No_Of_Copies_Available">No of copies Available</label>
         </div>
-                        <div class="add-button mt-4">
-                            <button type="button" class="btn btn-danger btn-block" id="add" >ADD</button>
-                            <a class="btn btn-danger btn-block" href="{% url 'mngmem' %}">Manage Member</a>
-                        </div>
-                      </form>
-                </div>
+        <div class="add-button mt-4">
+            <button type="button" name="ADD" class="btn btn-danger btn-block" id="add" >ADD</button>
+        <a class="btn btn-danger btn-block" href="{% url 'mngmem' %}">Manage Member</a>
+        </div>
+    </form>
+</div>
 
                 <!-- Book List -->
-                <div class="col-lg-7" id="book_list">
-                    <table class="table table-borderless table-striped mt-3 ">
+            <div class="col-lg-7">
+                <div class="container"> 
+                    <table class="table table-borderless table-striped mt-3 " id="book_list" style="background-color: white;" border="2">
                         <thead>
                             <tr>
                                 <th scope="col">Name</th>
@@ -129,17 +130,17 @@
                         </thead>
                         <tbody id="tabs">
                           {% for book in book %}
-                            <tr class="tab">
+                          <tr class="tab">
                              <td>{{ book.Title }}</td>
                              <td>{{ book.Name_of_Author }}</td>
                              <td>{{ book.Publisher }}</td>
                              <td>{{ book.Arrival_date }}</td>
-                             <td>{{ book.No_Of_Copies_Available  }}</td>
+                             <td>{{ book.No_Of_copies_Available  }}</td>
                              <td>
                               <button type="button" class="close" aria-label="Close" onclick="removeBook(this)">
                                 <span aria-hidden="true">&times;</span>
                  
-                                </button>
+                              </button>
                               </td>
                           </tr>
                           {% endfor %}                       
@@ -147,10 +148,11 @@
                     </table>
                 </div>
             </div>
-        </div> 
-    </section>
+         </div>
+    </div> 
+</section>
     
-</body>
+
 <script> 
      // JavaScript function to remove a book
      function removeBook(button) {
@@ -158,4 +160,6 @@
         row.remove();
     }
 </script>
+
+</body>
 </html>

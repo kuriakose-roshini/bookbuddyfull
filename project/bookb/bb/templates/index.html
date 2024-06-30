@@ -19,22 +19,21 @@
 				<li><a href="{% url 'adminlogin' %}">Admin Login</a></li>
 				<li><a href="{% url 'about' %}">About</a></li>
 				<li><a href="{% url 'report' %}">Reports</a></li>
-			</ul>
-	    </nav>   
-   </div>	
-   <form action="{% url 'search_books' %}" method="GET">
-	<input type="text" name="q" placeholder="Search books...">
-	<button type="submit">Search</button>
-<!-- Display search results here -->
-	{% if books %}
-	<h2>Search Results:</h2>
-	<ul>
-		{% for book in books %}
-		<li>{{ book.Title }} by {{ book.Name_of_Author }}</li>
-		{% endfor %}
-	</ul>
-	{% endif %}  
-</form>	
+           <form action="{% url 'search_books' %}" method="GET">
+	 		<input type="text" name="q" placeholder="Search books...">
+	 		<button type="submit">Search</button>
+           <!-- Display search results here -->
+	 		{% if books %}
+	 		<h2>Search Results:</h2>
+	 		<ul>
+				{% for book in books %}
+				<li>{{ book.Title }} by {{ book.Name_of_Author }}</li>
+				{% endfor %}
+	 		</ul>
+	 		{% endif %}  
+   		   </form>	</ul> 
+       </nav>
+</div>
 	<!--about -->
 {% include 'about.html' %} 
 	<footer>

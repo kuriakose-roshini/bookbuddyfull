@@ -70,11 +70,7 @@ button:hover{
   
   /* Change the background color of the dropdown button when the dropdown content is shown */
   .dropdown:hover .dropbtn {background-color: #1bbbd1;}
-  .search{
-    float: right;
-    width: 25%;
-    height: 25%;
-  }
+  
   .nav{
     background-color: rgb(59, 124, 185);
     color: black;

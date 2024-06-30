@@ -5,7 +5,7 @@
   background-repeat: no-repeat;
 	background-blend-mode: normal;
 	background-size: cover;
-	background-image:url(https://media.istockphoto.com/id/1816810090/photo/3d-rendering-magic-library.webp?b=1&s=170667a&w=0&k=20&c=R5_fGd9iA8aKWAU2eTuB2XJlvqhuYpiX8hI7b-gc6BU=);
+	
 	height: 675px;
 	width: 100%;
 }
@@ -73,6 +73,7 @@ footer {
 }
 body{
     background-color: #a2cffa;
+    background-image:url(https://img.freepik.com/premium-photo/magical-3d-library-filled-with-floating-books-mystical-artifacts_1004780-21.jpg);
 }
 .heading{
     width:90%;
