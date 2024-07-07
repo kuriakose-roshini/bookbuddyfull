@@ -1,7 +1,7 @@
 from django.template import loader
 from django.contrib.auth import authenticate, login as authlogin, logout as authlogout
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.http import HttpResponse
 from .models import Reader
 from .models import Book
@@ -13,13 +13,14 @@ from django.contrib.auth import authenticate,login,logout
 from .models import Customer
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-#from .models import Book
+from .models import Borrower
 #from .models import Invoice, is_due_date_approaching
 from .forms import BookSearchForm
 from django.http import JsonResponse
 from .models import LibraryItem
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import View
+from django.utils import timezone
 
 #from .forms import RegisterForm
 
@@ -107,10 +108,10 @@ def Register(request):
     return render(request,'register.html')
 
 @login_required
-def listBook(request):
+# def listBook(request):
       
-        #books=Book.objects.all()
-        return render(request,'list.html')            
+#         books=Book.objects.all()
+#         return render(request,'list.html',{'books':books})            
 def mngbook(request):
         template = loader.get_template('mngbook.html')
         return HttpResponse(template.render())  
@@ -228,3 +229,49 @@ def search_books(request):
     else:
         books = []
     return render(request, 'index.html', {'books': books})
+
+# def request_book(request, book_id):
+#     if request.method == 'POST':
+#         book = get_object_or_404(Book, id=book_id)
+#         reader = get_object_or_404(Reader, user=request.user)  # Assuming the Reader is related to the current user
+
+#         borrower = Borrower.objects.create(
+#             b_name=request.user.get_full_name(),
+#             b_idnumber=reader,
+#             b_emailid=request.user.email,
+#             b_username=request.user.username,
+#             b_date_of_borrow=timezone.now(),
+#             b_return_date=timezone.now() + timezone.timedelta(days=14)  # Example: 14 days borrowing period
+#         )
+#         return redirect('list_books')  # Redirect to the list of books or any other page
+
+#     return HttpResponse(status=405)
+
+
+def listBook(request):
+    books = Book.objects.all()
+    return render(request, 'list.html', {'books': books})
+
+def request_book(request, book_id):
+    if request.method == 'POST':
+        book = get_object_or_404(Book, id=book_id)
+        print(f"Current user: {request.user.username}")  # Debugging print statement
+
+        try:
+            customer = request.user.customer_profile
+            print(f"Customer found: {customer.name}")
+        except Customer.DoesNotExist:
+            print("No matching Customer found")
+            return HttpResponse("No matching Customer found", status=404)
+
+        borrower = Borrower.objects.create(
+            b_name=customer.name,
+            b_idnumber=customer,  # Assuming Borrower model can reference Customer model
+            b_emailid=request.user.email,
+            b_username=request.user.username,
+            b_date_of_borrow=timezone.now(),
+            b_return_date=timezone.now() + timezone.timedelta(days=14)  # Example: 14 days borrowing period
+        )
+        return redirect('list')
+
+    return HttpResponse(status=405)

@@ -14,12 +14,22 @@ from django.db import models
 from django.utils import timezone
 
 # Create your models here.
+# class Reader(models.Model):
+#     name=models.CharField(max_length=20,blank=False,null=True)
+#     idnumber=models.CharField(max_length=25,blank=False,null=False)
+#     emailid=models.EmailField(null=True)
+#     username=models.CharField(max_length=30,null=True)
+#     password=models.CharField(max_length=8,blank=False,null=False)
+
 class Reader(models.Model):
-    name=models.CharField(max_length=20,blank=False,null=True)
-    idnumber=models.CharField(max_length=25,blank=False,null=False)
-    emailid=models.EmailField(null=True)
-    username=models.CharField(max_length=30,null=True)
-    password=models.CharField(max_length=8,blank=False,null=False)
+    name = models.CharField(max_length=20, blank=False, null=True)
+    idnumber = models.CharField(max_length=25, blank=False, null=False)
+    emailid = models.EmailField(null=True)
+    username = models.CharField(max_length=30, null=True)
+    password = models.CharField(max_length=8, blank=False, null=False)
+
+    def _str_(self):
+        return self.username
 
 
 
@@ -75,16 +85,19 @@ class Book(models.Model):
 
     #def __str__(self):
      #   return self.name_of_book
-class Borrower(models.Model):
-    b_name=models.CharField(max_length=20,blank=False,null=True)
-    b_idnumber=models.ForeignKey(Reader, on_delete=models.CASCADE)
-    b_emailid=models.EmailField(null=True)
-    b_username=models.CharField(max_length=30,null=True)
-    b_date_of_borrow=models.DateField()
-    b_return_date=models.DateField()
 
-    def __str__(self):
-        return self.b_username
+# class Borrower(models.Model):
+#     b_name=models.CharField(max_length=20,blank=False,null=True)
+#     b_idnumber=models.ForeignKey(Reader, on_delete=models.CASCADE)
+#     b_emailid=models.EmailField(null=True)
+#     b_username=models.CharField(max_length=30,null=True)
+#     b_date_of_borrow=models.DateField()
+#     b_return_date=models.DateField()
+
+#     def __str__(self):
+#         return self.b_username
+
+
 
 class Customer(models.Model):
 
@@ -103,6 +116,20 @@ class Customer(models.Model):
     updated_at = models.DateTimeField(auto_now = True)    
     def __str__(self):
         return self.name
+    
+
+class Borrower(models.Model):
+    b_name = models.CharField(max_length=20, blank=False, null=True)
+    b_idnumber = models.ForeignKey(Customer, on_delete=models.CASCADE)  # Reference Customer model
+    b_emailid = models.EmailField(null=True)
+    b_username = models.CharField(max_length=30, null=True)
+    b_date_of_borrow = models.DateField()
+    b_return_date = models.DateField()
+   # b_title =models.CharField(max_length=200)
+    #b_title = models.ForeignKey(Book, on_delete=models.CASCADE)
+
+    def _str_(self):
+        return self.b_username
     
 #profile
 class Profile(models.Model):

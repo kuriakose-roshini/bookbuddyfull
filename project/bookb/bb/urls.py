@@ -23,6 +23,7 @@ urlpatterns = [
     path('profile:settings/', views.profilesett, name="profilesett"),
     #path('books/',views.listBook,name='listBook'),
     path('search/', search_books, name='search_books'),
+    path('request_book/<int:book_id>/', views.request_book, name='request_book')
 
 
 
