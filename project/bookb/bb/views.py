@@ -173,6 +173,10 @@ def mngmem(request):
                 print(error_message)
                 messages.error(request,error_message)
         return render(request, 'mngmem.html',{'reader':reader})
+    
+def borrow(request):
+        template = loader.get_template('borrowerdisp.html')
+        return HttpResponse(template.render())     
        
 @login_required  
 def profile(request):
