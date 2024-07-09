@@ -112,36 +112,74 @@ def Register(request):
       
 #         books=Book.objects.all()
 #         return render(request,'list.html',{'books':books})            
+# def mngbook(request):
+#         template = loader.get_template('mngbook.html')
+#         books = Book.objects.all()
+#         return HttpResponse(template.render(request, {'books': books}))  
+#         books = Book.objects.all()
+#         try:
+#                 if request.POST and "ADD" in request.POST:
+#                         Title= request.POST.get('Title')
+#                         Name_of_Author= request.POST.get('Name_of_Author')
+#                         Publisher = request.POST.get('Publisher')
+#                         Arrival_date = request.POST.get('Arrival_date')
+#                         No_Of_Copies_Available=request.POST.get('No_Of_Copies_Available')
+#                         print(Title)
+#                         print(Name_of_Author)
+#                         print(Publisher)
+#                         print(Arrival_date)
+#                         print(No_Of_Copies_Available)
+
+#                         books = Book.objects.create_book(
+#                                 Title=Title,
+#                                 Name_of_Author=Name_of_Author,
+#                                 Publisher=Publisher,
+#                                 Arrival_date=Arrival_date ,# Use first_name instead of name
+#                         )              
+                                  
+#         except IntegrityError as e:
+#                 print(f"IntegrityError: {e}")
+#                 error_message = "invalid input data"
+#                 print(error_message)
+#                 messages.error(request,error_message)
+#         return render(request, 'mngmem.html',{'books':books})
 def mngbook(request):
-        template = loader.get_template('mngbook.html')
-        return HttpResponse(template.render())  
-        book = Book.objects.all()
-        try:
-                if request.POST and "ADD" in request.POST:
-                        Title= request.POST.get('Title')
-                        Name_of_Author= request.POST.get('Name_of_Author')
+    # Example: Fetching all books from the database
+    books = Book.objects.all()
+    try:
+         if request.POST and "ADD" in request.POST:
+                        Title = request.POST.get('Title')
+                        Name_of_Author = request.POST.get('Name_of_Author')
                         Publisher = request.POST.get('Publisher')
                         Arrival_date = request.POST.get('Arrival_date')
-                        No_Of_Copies_Available=request.POST.get('No_Of_Copies_Available')
+                        No_of_Copies_Available = request.POST.get('No_of_Copies_Available')
                         print(Title)
                         print(Name_of_Author)
                         print(Publisher)
                         print(Arrival_date)
-                        print(No_Of_Copies_Available)
+                        print(No_of_Copies_Available)
 
-                        book = Book.objects.create_book(
-                                Title=Title,
-                                Name_of_Author=Name_of_Author,
-                                Publisher=Publisher,
-                                Arrival_date=Arrival_date ,# Use first_name instead of name
-                        )              
-                                  
-        except IntegrityError as e:
+                        books = Book.objects.create(
+                             Title=Title,
+                             Name_of_Author=Name_of_Author,
+                             Publisher=Publisher,
+                             Arrival_date=Arrival_date
+                        )   
+                  
+    except IntegrityError as e:
                 print(f"IntegrityError: {e}")
                 error_message = "invalid input data"
                 print(error_message)
                 messages.error(request,error_message)
-        return render(request, 'mngmem.html',{'book':book})
+    
+    
+    # Prepare context dictionary to pass to the template
+    context = {
+        'books': books,
+    }
+    
+    # Render the template with context data
+    return render(request, 'mngbook.html', context)
 
 
 def mngmem(request):
@@ -228,7 +266,7 @@ def search_books(request):
         books = Book.objects.filter(Title__icontains=query)
     else:
         books = []
-    return render(request, 'index.html', {'books': books})
+    return render(request, 'index.html',{'books': books})
 
 # def request_book(request, book_id):
 #     if request.method == 'POST':

@@ -107,7 +107,7 @@
             <label for="No_Of_Copies_Available">No of copies Available</label>
         </div>
         <div class="add-button mt-4">
-            <button type="button" name="ADD" class="btn btn-danger btn-block" id="add" >ADD</button>
+            <button type="submit" name="ADD" class="btn btn-danger btn-block" id="add">ADD</button>
         <a class="btn btn-danger btn-block" href="{% url 'mngmem' %}">Manage Member</a>
         </div>
     </form>
@@ -129,7 +129,7 @@
                             </tr>
                         </thead>
                         <tbody id="tabs">
-                          {% for book in book %}
+                          {% comment %} {% for book in books %}
                           <tr class="tab">
                              <td>{{ book.Title }}</td>
                              <td>{{ book.Name_of_Author }}</td>
@@ -143,7 +143,23 @@
                               </button>
                               </td>
                           </tr>
-                          {% endfor %}                       
+                          {% endfor %}                        {% endcomment %}
+                          {% for book in books %}
+                          <tr>
+                              <td>{{ book.id }}</td>
+                              <td>{{ book.Title }}</td>
+                              <td>{{ book.Name_of_Author }}</td>
+                              <td>{{ book.Publisher }}</td>
+                              <td>{{ book.Arrival_date }}</td>
+                              <td>{{ book.No_Of_copies_Available }}</td>
+                              <td>
+                                <button type="button" class="close" aria-label="Close" onclick="removeBook(this)">
+                                  <span aria-hidden="true">&times;</span>
+                   
+                                </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
