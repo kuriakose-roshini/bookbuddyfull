@@ -55,5 +55,42 @@
         <a class="nav" href="{% url 'Logout' %}">Logout</a>
         <a class="btn btn-danger btn-block" href="{% url 'mngbook' %}">Manage Book</a>
         <a class="btn btn-danger btn-block" href="{% url 'mngmem' %}">Manage Member</a>
+
+        <div class="col-lg-7">
+            <div class="container"> 
+         <table class="table table-borderless table-striped mt-3 " id="borrower_list" style="background-color: white;" border="2">
+        
+            <thead> 
+            <tr> 
+             <th>No</th>
+             <th>Name</th>
+             <th>Emailid</th>
+             <th>Username</th>
+             <th>Date of Borrow</th>
+             <th>Date to return</th>
+             <th>Memberid</th> 
+            <th>Book Title</th></thead>
+            </tr>
+            <tbody id="tabs">
+            {% for borrower in borrowers %}
+            <tr>
+                <td>{{ borrower.id }}</td>
+                <td>{{ borrower.b_name }}</td>
+                <td>{{ borrower.b_idnumber }}</td>
+                <td>{{ borrower.b_emailid }}</td>
+                <td>{{ borrower.b_username }}</td>
+                <td>{{ borrower.b_date_of_borrow }}</td>
+                <td>{{ borrower.b_return_date}}</td>
+                <td>{{ borrower.b_title}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</div>
+</div>
+</section>
+        
+
 </body>   
 </html>     

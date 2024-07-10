@@ -317,3 +317,7 @@ def request_book(request, book_id):
         return redirect('list')
 
     return HttpResponse(status=405)
+
+def borrowers(request):
+      borrowers=Borrower.objects.all()
+      return render(request,'borrowerdisp.html',{'borrowers':borrowers})
