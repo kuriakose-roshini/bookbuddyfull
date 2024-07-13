@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         /* Custom CSS */
-        #mem_list {
+        #borrower_list {
             margin-top: 20px;
         }
         .table-striped tbody tr:nth-of-type(odd) {
@@ -53,9 +53,16 @@
             <h3></h3>
         </div>
         <a class="nav" href="{% url 'Logout' %}">Logout</a>
-        <a class="btn btn-danger btn-block" href="{% url 'mngbook' %}">Manage Book</a>
-        <a class="btn btn-danger btn-block" href="{% url 'mngmem' %}">Manage Member</a>
-
+        <div class="col-lg-5">
+            <form action="" id="RegForm" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="add-button mt-4"> <!--
+                    <button type="submit" name="ADD" class="btn btn-danger btn-block" id="add">ADD</button>-->
+                    <a class="btn btn-danger btn-block" href="{% url 'mngbook' %}">Manage Book</a>
+                    <a class="btn btn-danger btn-block" href="{% url 'mngmem' %}">Manage Member</a>
+              </div>
+            </form>
+          </div>
         <div class="col-lg-7">
             <div class="container"> 
          <table class="table table-borderless table-striped mt-3 " id="borrower_list" style="background-color: white;" border="2">
