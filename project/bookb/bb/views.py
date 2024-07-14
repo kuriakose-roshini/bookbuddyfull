@@ -213,8 +213,8 @@ def mngmem(request):
         return render(request, 'mngmem.html',{'reader':reader})
     
 def borrow(request):
-        template = loader.get_template('borrowerdisp.html')
-        return HttpResponse(template.render())     
+      template = loader.get_template('borrowerdisp.html')
+      return HttpResponse(template.render())     
        
 @login_required  
 def profile(request):
@@ -289,6 +289,15 @@ def search_books(request):
 
 #     return HttpResponse(status=405)
 
+#def borrowers(request):
+ #     borrowers = Borrower.objects.all()
+  #    return render(request, 'borrowerdisp.html', {'borrower': borrowers})
+
+
+
+
+
+
 
 def listBook(request):
     books = Book.objects.all()
@@ -306,18 +315,19 @@ def request_book(request, book_id):
             print("No matching Customer found")
             return HttpResponse("No matching Customer found", status=404)
 
-        borrower = Borrower.objects.create(
+        borrower=Borrower.objects.create(
             b_name=customer.name,
             b_idnumber=customer,  # Assuming Borrower model can reference Customer model
             b_emailid=request.user.email,
             b_username=request.user.username,
             b_date_of_borrow=timezone.now(),
-            b_return_date=timezone.now() + timezone.timedelta(days=14)  # Example: 14 days borrowing period
+            b_return_date=timezone.now() + timezone.timedelta(days=14), # Example: 14 days borrowing period
+            b_bookid=book
         )
         return redirect('list')
 
     return HttpResponse(status=405)
 
 def borrowers(request):
-      borrowers=Borrower.objects.all()
+      borrowers = Borrower.objects.all()
       return render(request,'borrowerdisp.html',{'borrowers':borrowers})

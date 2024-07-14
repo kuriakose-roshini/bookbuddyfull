@@ -55,7 +55,7 @@
         <a class="nav" href="{% url 'Logout' %}">Logout</a>
         <div class="col-lg-5">
             <form action="" id="RegForm" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
+                <!--{% csrf_token %}-->
                 <div class="add-button mt-4"> <!--
                     <button type="submit" name="ADD" class="btn btn-danger btn-block" id="add">ADD</button>-->
                     <a class="btn btn-danger btn-block" href="{% url 'mngbook' %}">Manage Book</a>
@@ -63,41 +63,41 @@
               </div>
             </form>
           </div>
-        <div class="col-lg-7">
+        <div class="col-lg-5">
             <div class="container"> 
-         <table class="table table-borderless table-striped mt-3 " id="borrower_list" style="background-color: white;" border="2">
+                <table class="table table-borderless table-striped mt-3 " id="borrower_list" style="background-color: white;" border="2">
         
-            <thead> 
-            <tr> 
-             <th>No</th>
-             <th>Name</th>
-             <th>Emailid</th>
-             <th>Username</th>
-             <th>Date of Borrow</th>
-             <th>Date to return</th>
-             <th>Memberid</th> 
-            <th>Book Title</th></thead>
-            </tr>
-            <tbody id="tabs">
-            {% for borrower in borrowers %}
-            <tr>
-                <td>{{ borrower.id }}</td>
-                <td>{{ borrower.b_name }}</td>
-                <td>{{ borrower.b_idnumber }}</td>
-                <td>{{ borrower.b_emailid }}</td>
-                <td>{{ borrower.b_username }}</td>
-                <td>{{ borrower.b_date_of_borrow }}</td>
-                <td>{{ borrower.b_return_date}}</td>
-                <td>{{ borrower.b_title}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-        </table>
+                    <thead> 
+                         <tr> 
+                            <th scope="col">No</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Emailid</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Date of Borrow</th>
+                            <th scope="col">Date to return</th>
+                            <th scope="col">Memberid</th> 
+                            <th scope="col">Book id</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabs">
+                        {% for borrower in borrowers %}
+                            <tr>
+                                <td>{{ borrower.id }}</td>
+                                <td>{{ borrower.b_name }}</td>
+                                <td>{{ borrower.b_idnumber }}</td>
+                                <td>{{ borrower.b_emailid }}</td>
+                                <td>{{ borrower.b_username }}</td>
+                                <td>{{ borrower.b_date_of_borrow }}</td>
+                                <td>{{ borrower.b_return_date}}</td>
+                                <td>{{ borrower.b_bookid}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-</div>
-</div>
-</section>
-        
 
+</section>
 </body>   
 </html>     

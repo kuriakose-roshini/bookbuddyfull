@@ -126,7 +126,7 @@ class Borrower(models.Model):
     b_date_of_borrow = models.DateField()
     b_return_date = models.DateField()
    # b_title =models.CharField(max_length=200)
-    b_title = models.ForeignKey(Book, on_delete=models.CASCADE,default=1)
+    b_bookid = models.ForeignKey(Book, on_delete=models.CASCADE)
     #b_title=models.ForeignKey(Book, on_delete=models.CASCADE,default=1) 
 
     def _str_(self):

@@ -1,5 +1,3 @@
-
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +8,7 @@
     <meta name="keywords" content="Library System, Book System">
     <meta name="author" content="Codeblogger">
     <title>Book Buddy</title>
+    {% load static %}
     <link rel="stylesheet" href="{% static 'css/mngmem.css' %}">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -24,14 +23,13 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
 
     <!-- Pages -->
-    <link rel="stylesheet" href="mngmem.css">
-    <link rel="stylesheet" href="/CSS/book_list.css">
-    <link rel="stylesheet" href="/CSS/insertion_section.css">
+    <link rel="stylesheet" href="{% static 'CSS/book_list.css' %}">
+    <link rel="stylesheet" href="{% static 'CSS/insertion_section.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         /* Custom CSS */
         #mem_list {
-            margin-top: 20px;
+            margin-top: 0px; /* Adjusted to make the table appear higher */
         }
         .table-striped tbody tr:nth-of-type(odd) {
             background-color: #ffff;
@@ -41,6 +39,17 @@
         }
         .close:hover {
             color: red;
+        }
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .flex-item {
+            flex: 1;
+            margin: 10px;
+        }
+        .container {
+            padding-top: 20px; /* Adjust this value to move the container higher */
         }
     </style>
 </head>
@@ -56,66 +65,65 @@
         <a class="nav" href="{% url 'Logout' %}">Logout</a>
         <!-- mngmem.html -->
 
-<div class="col-lg-5">
-  <form action="" id="RegForm" method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      <div class="form-floating">
-          <input type="text" class="form-control" id="name" placeholder="Name" name="name" required>
-          <label for="name">Name</label>
-      </div>
-      <div class="form-floating">
-          <input type="text" class="form-control" id="username" placeholder="Username" name="username" required>
-          <label for="username">Username</label>
-      </div>
-      <div class="form-floating">
-          <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
-          <label for="email">Email</label>
-      </div>
-      <div  class="form-floating">
-          <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
-          <label for="password">Password</label>
-      </div>
-      <div class="add-button mt-4">
-          <button type="submit" name="ADD" class="btn btn-danger btn-block" id="add">ADD</button>
-      <a class="btn btn-danger btn-block" href="{% url 'mngbook' %}">Manage Book</a>
-      <a class="btn btn-danger btn-block" href="{% url 'borrow' %}">Borrowers</a>
-    </div>
-  </form>
-</div>
-
+        <div class="flex-container">
+            <div class="flex-item">
+                <form action="" id="RegForm" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="name" placeholder="Name" name="name" required>
+                        <label for="name">Name</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="username" placeholder="Username" name="username" required>
+                        <label for="username">Username</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
+                        <label for="email">Email</label>
+                    </div>
+                    <div  class="form-floating">
+                        <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
+                        <label for="password">Password</label>
+                    </div>
+                    <div class="add-button mt-4">
+                        <button type="submit" name="ADD" class="btn btn-danger btn-block" id="add">ADD</button>
+                        <a class="btn btn-danger btn-block" href="{% url 'mngbook' %}">Manage Book</a>
+                        <a class="btn btn-danger btn-block" href="{% url 'borrow' %}">Borrowers</a>
+                    </div>
+                </form>
+            </div>
 
             <!-- Book List -->
-            <div class="col-lg-5">
-              <div class="container">
-                  <table class="table table-borderless table-striped mt-3" id="mem_list" style="background-color: white;" border="2">
-                      <thead>
-                          <tr>
-                              <th scope="col">Name</th>
-                              <th scope="col">Username</th>
-                              <th scope="col">Email</th>
-                              <th scope="col">Due</th>
-                              <th></th>
-                          </tr>
-                      </thead>
-                      <tbody id="tabs">
-                          {% for reader in reader %}
-                          <tr class="tab">
-                              <td>{{ reader.name }}</td>
-                              <td>{{ reader.user.username }}</td>
-                              <td>{{ reader.user.email }}</td>
-                              <td>No</td>
-                              <td>
-                                  <button type="button" class="close" aria-label="Close" onclick="removeReader(this)">
-                                      <span aria-hidden="true">&times;</span>
-                                  </button>
-                              </td>
-                          </tr>
-                          {% endfor %}
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-          
+            <div class="flex-item">
+                <div class="container">
+                    <table class="table table-borderless table-striped mt-3" id="mem_list" style="background-color: white;" border="2">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Due</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabs">
+                            {% for reader in reader %}
+                            <tr class="tab">
+                                <td>{{ reader.name }}</td>
+                                <td>{{ reader.user.username }}</td>
+                                <td>{{ reader.user.email }}</td>
+                                <td>No</td>
+                                <td>
+                                    <button type="button" class="close" aria-label="Close" onclick="removeReader(this)">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </section>

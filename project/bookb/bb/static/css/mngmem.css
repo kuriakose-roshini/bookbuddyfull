@@ -1,85 +1,72 @@
-#mem_list{
+#mem_list {
     background: rgba(0,0,0,.75);
-    width: 92.5%;
+    width: 100%;
     height: 385px;
-    left: 25px;
     overflow-y: scroll;
     border-radius: 7.5px;
-    &::-webkit-scrollbar {
-        display: none;
-    }
-    table{
-        background: rgba(256,256,256,.75);
-        border-radius: 7.5px;
-        
-        thead{
-            color: #1a1a1a;
-        }
-        tbody{
-            color: #262626;
-        }
-        
-    }
 }
-
-#insertion_section{
+#mem_list::-webkit-scrollbar {
+    display: none;
+}
+#mem_list table {
+    background: rgba(256,256,256,.75);
+    border-radius: 7.5px;
+}
+#mem_list thead {
+    color: #1a1a1a;
+}
+#mem_list tbody {
+    color: #262626;
+}
+#insertion_section {
     background: rgba(0,0,0,.75);
     border-radius: 7.5px;
     padding: 15px 10px 15px 10px;
     width: 100%;
-    .form-group{
-        width: 90%;
-        margin-left: 10%;
-
-        input,label{
-            width: 90%;
-        }
-        input{
-            opacity: .20;
-            transition: .5s;
-            outline: none;
-        }
-
-        #two-section{
-            margin-left: -7.5%;
-            input{
-                width: 85%;
-            }
-        }
-        button{
-            margin-left: -5%;
-        }
-
-    }
-
 }
-
-body{
+#insertion_section .form-group {
+    width: 90%;
+    margin-left: 10%;
+}
+#insertion_section .form-group input,
+#insertion_section .form-group label {
+    width: 90%;
+}
+#insertion_section .form-group input {
+    opacity: .20;
+    transition: .5s;
+    outline: none;
+}
+#insertion_section #two-section {
+    margin-left: -7.5%;
+}
+#insertion_section #two-section input {
+    width: 85%;
+}
+#insertion_section .form-group button {
+    margin-left: -5%;
+}
+body {
     padding: 0;
     margin: 0;
     height: 100vh;
-}
-/* 
-Wallpaper
-Source: https://wallpapersafari.com/hd-library-wallpaper/ 
-*/
-#one-page{
     height: 100%;
     background-image: url("https://cdn.wallpapersafari.com/91/90/Bmhy8U.jpg");
-    background-size: auto;
-    -webkit-background-size: auto;
-    -moz-background-size: auto;
-    -o-background-size: auto ;
-    
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
-.container{
+.container {
     position: relative;
     top: 15%;
 }
-h1{
+h1 {
     font-size: 50px;
 }
-.nav:link{
+.nav:link {
     background-color: white;
     color: black;
     border: 2px solid green;
@@ -87,29 +74,21 @@ h1{
     text-align: center;
     text-decoration: none;
     display: inline-block;
-  }
-  
-  .nav:hover{
+}
+.nav:hover {
     background-color: rgb(28, 146, 167);
     color: white;
-  }
-@media (max-width: 976px){
-    #one-page{
+}
+@media (max-width: 976px) {
+    #one-page {
         height: 150%;
         background-image: url("https://cdn.wallpapersafari.com/91/90/Bmhy8U.jpg");
         background-size: auto;
         -webkit-background-size: auto;
         -moz-background-size: auto;
-        -o-background-size: auto ; 
+        -o-background-size: auto;
     }
 }
-h3{
+h3 {
     color: aliceblue;
 }
-/*
-button{
-    border-radius: 20px;
-    float: right;
-    font-size: large;
-    width:10%;
-}*/

@@ -2,16 +2,16 @@
 	font-family: Arial, sans-serif;
 	margin: 0;
 	padding: 0;
+  background-image:url(https://images.pexels.com/photos/694740/pexels-photo-694740.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
   background-repeat: no-repeat;
 	background-blend-mode: normal;
 	background-size: cover;
-	background-repeat: no-repeat;
 	height: 675px;
 	width: 100%;
 }
 
 header {
-	background-color: #5b91c4;
+	background-color: rgb(223, 199, 155);
 	color: rgb(26, 25, 25);
 	padding: 1em;
 }
@@ -61,8 +61,7 @@ footer {
   }
   
   li a:hover {
-	background-color:#5394d1;
-	color:white;
+	background-color:rgb(223, 199, 155);
   }
 /*about css*/
 *{
@@ -73,7 +72,7 @@ footer {
 }
 body{
     background-color: #a2cffa;
-    background-image:url(https://img.freepik.com/premium-photo/magical-3d-library-filled-with-floating-books-mystical-artifacts_1004780-21.jpg);
+    
 }
 .heading{
     width:90%;
@@ -208,13 +207,13 @@ body{
    
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: white; 
+    background: #201f1f; 
     border-radius: 10px;
   }
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #a2cffa; 
+    background: #201f1f; 
   }
 
 /*search bar*/
@@ -224,10 +223,10 @@ button{
   width: 80px;
   height: 60px; ;
   border-radius: 6px;
-  border:5px solid #a2cffa;
+  border:5px solid #201f1f;
  }		
 button:hover{
-background-color: #a2cffa;
+background-color: rgb(223, 199, 155);
 color:rgb(0, 0, 0);
 }
 #searchbar {
@@ -235,13 +234,18 @@ color:rgb(0, 0, 0);
   font-size: 16px;
   padding: 15px 45px 15px 30px;
   background-color:none;
-  color: #201f1f;
+  color: #e6e1e1;
   border-radius: 6px;
-  border:5px solid #a2cffa;
+  border:5px solid #201f1f;
   transition: all .4s;
   border-radius: 5px;
   width: 60%;
   box-sizing: border-box;
+}
+/*search previw*/
+.output{
+  background-color: rgb(223, 199, 155);
+  color:rgb(0, 0, 0);
 }
 * {
   margin: 0;
