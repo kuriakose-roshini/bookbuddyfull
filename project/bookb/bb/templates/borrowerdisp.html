@@ -50,7 +50,7 @@
         <!-- Title -->
         <div class="row">
             <h1 class="text-light">Book Buddy</h1><br>
-            <h3></h3>
+            <h3>Borrower's List</h3>
         </div>
         <a class="nav" href="{% url 'Logout' %}">Logout</a>
         <div class="col-lg-5">
@@ -79,7 +79,7 @@
                             <th scope="col">Book id</th>
                         </tr>
                     </thead>
-                    <tbody id="tabs">
+                    <tbody>
                         {% for borrower in borrowers %}
                             <tr>
                                 <td>{{ borrower.id }}</td>
@@ -88,8 +88,8 @@
                                 <td>{{ borrower.b_emailid }}</td>
                                 <td>{{ borrower.b_username }}</td>
                                 <td>{{ borrower.b_date_of_borrow }}</td>
-                                <td>{{ borrower.b_return_date}}</td>
-                                <td>{{ borrower.b_bookid}}</td>
+                                <td>{{ borrower.b_return_date }}</td>
+                                <td>{{ borrower.b_bookid }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>

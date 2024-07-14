@@ -330,4 +330,4 @@ def request_book(request, book_id):
 
 def borrowers(request):
       borrowers = Borrower.objects.all()
-      return render(request,'borrowerdisp.html',{'borrowers':borrowers})
+      return render(request,'borrowerdisp.html',{'borrowers': borrowers})

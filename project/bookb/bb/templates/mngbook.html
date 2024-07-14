@@ -15,13 +15,10 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
-
     <!-- Pages -->
     <link rel="stylesheet" href="mngbook.css">
     <link rel="stylesheet" href="/CSS/book_list.css">
@@ -51,132 +48,80 @@
                 <h3>Book Management</h3>
             </div>
             <a class="nav" href="{% url 'Logout' %}">Logout</a>
-            <!--<div class="row mt-4">-->
-                <!-- insertion section --><!--
-                <div class="col-lg-5" id="insertion_section">
-                    <form class="form-group justify-content-center">
-                        <div class="row" id="name-section">
-                            <label for="bookName" class="text-light">Title</label>
-                            <input type="text" class="form-control" id="bookName">
-                        </div>
-                        <div class="row" id="author-section">
-                            <label for="authorName" class="text-light">Author</label>
-                            <input type="text" class="form-control" id="authorName">
-                        </div>
-                        <div class="row" id="publisher-section">
-                            <label for="publisherName" class="text-light">Publisher</label>
-                            <input type="text" class="form-control" id="publisherName">
-                        </div>
-                        <div class="col-6">
-                          <label for="serialNumber" class="text-light">Date of arrival</label>
-                          <input type="date" class="form-control" id="date">
-                      </div>
-                        <div class="row" id="two-section">
-                            <div class="col-6">
-                                <label for="numberPage" class="text-light">Number of copies</label>
-                                <input type="number" class="form-control" id="numberPage">
-                            </div>
-                            <div class="col-6">
-                                <label for="serialNumber" class="text-light">Number</label>
-                                <input type="number" class="form-control" id="serialNumber">
-                            </div>
-                        </div>
-                    -->
-                        
-<div class="col-lg-5">
-    <form action="" id="RegForm" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="form-floating">
-            <input type="text" class="form-control" id="title" placeholder="Title" name="title" required>
-            <label for="title">Title</label>
-        </div>
-        <div class="form-floating">
-            <input type="text" class="form-control" id="name of author" placeholder="Name_of_Author" name="name of author" required>
-            <label for="name of author">Name_of_Author</label>
-        </div>
-        <div class="form-floating">
-            <input type="text" class="form-control" id="publisher" placeholder="Publisher" name="publisher" required>
-            <label for="publisher">Publisher</label>
-        </div>
-        <div class="form-floating">
-            <input type="date" class="form-control" id="Arrival_Date" placeholder="Arrival_Date" name="Arrival_Date" required>
-            <label for="Arrival_Date">Arrival Date</label>
-        </div>
-        <div class="form-floating">
-            <input type="text" class="form-control" id="No_Of_Copies_Available" placeholder="No of copies available" name="No_Of_Copies_Available" required>
-            <label for="No_Of_Copies_Available">No of copies Available</label>
-        </div>
-        <div class="add-button mt-4">
-            <button type="submit" name="ADD" class="btn btn-danger btn-block" id="add">ADD</button>
-        <a class="btn btn-danger btn-block" href="{% url 'mngmem' %}">Manage Member</a>
-        <a class="btn btn-danger btn-block" href="{% url 'borrow' %}">Borrowers</a>
-        </div>
-    </form>
-</div>
-
-                <!-- Book List -->
-            <div class="col-lg-7">
-                <div class="container"> 
-                    <table class="table table-borderless table-striped mt-3 " id="book_list" style="background-color: white;" border="2">
-                        <thead>
-                            <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Author</th>
-                                <th scope="col">Publisher</th>
-                                <th scope="col">Arrival_Date</th>
-                                <th scope="col">No_Of_Copies_Available</th>
-                               <!-- <th scope="col">number</th>-->
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabs">
-                          {% comment %} {% for book in books %}
-                          <tr class="tab">
-                             <td>{{ book.Title }}</td>
-                             <td>{{ book.Name_of_Author }}</td>
-                             <td>{{ book.Publisher }}</td>
-                             <td>{{ book.Arrival_date }}</td>
-                             <td>{{ book.No_Of_copies_Available  }}</td>
-                             <td>
-                              <button type="button" class="close" aria-label="Close" onclick="removeBook(this)">
-                                <span aria-hidden="true">&times;</span>
-                 
-                              </button>
-                              </td>
-                          </tr>
-                          {% endfor %}                        {% endcomment %}
-                          {% for book in books %}
-                          <tr>
-                              <td>{{ book.id }}</td>
-                              <td>{{ book.Title }}</td>
-                              <td>{{ book.Name_of_Author }}</td>
-                              <td>{{ book.Publisher }}</td>
-                              <td>{{ book.Arrival_date }}</td>
-                              <td>{{ book.No_Of_copies_Available }}</td>
-                              <td>
-                                <button type="button" class="close" aria-label="Close" onclick="removeBook(this)">
-                                  <span aria-hidden="true">&times;</span>
-                   
-                                </button>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+            
+            <!-- Insertion Section -->
+            <div id="insertion_section">
+                <form action="" id="RegForm" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="title" placeholder="Title" name="title" required>
+                        <label for="title">Title</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="name_of_author" placeholder="Name_of_Author" name="name_of_author" required>
+                        <label for="name_of_author">Name of Author</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="publisher" placeholder="Publisher" name="publisher" required>
+                        <label for="publisher">Publisher</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="date" class="form-control" id="Arrival_Date" placeholder="Arrival_Date" name="Arrival_Date" required>
+                        <label for="Arrival_Date">Arrival Date</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="No_Of_Copies_Available" placeholder="No of copies available" name="No_Of_Copies_Available" required>
+                        <label for="No_Of_Copies_Available">No of Copies Available</label>
+                    </div>
+                    <div class="add-button mt-4">
+                        <button type="submit" name="ADD" class="btn btn-danger btn-block" id="add">ADD</button>
+                        <a class="btn btn-danger btn-block" href="{% url 'mngmem' %}">Manage Member</a>
+                        <a class="btn btn-danger btn-block" href="{% url 'borrow' %}">Borrowers</a>
+                    </div>
+                </form>
             </div>
-         </div>
-    </div> 
-</section>
-    
 
-<script> 
-     // JavaScript function to remove a book
-     function removeBook(button) {
-        var row = button.closest('tr');
-        row.remove();
-    }
-</script>
+            <!-- Book List -->
+            <div id="book_list">
+                <table class="table table-borderless table-striped mt-3" style="background-color: white;" border="2">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Publisher</th>
+                            <th scope="col">Arrival_Date</th>
+                            <th scope="col">No_Of_Copies_Available</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabs">
+                        {% for book in books %}
+                        <tr>
+                            <td>{{ book.id }}</td>
+                            <td>{{ book.Title }}</td>
+                            <td>{{ book.Name_of_Author }}</td>
+                            <td>{{ book.Publisher }}</td>
+                            <td>{{ book.Arrival_date }}</td>
+                            <td>{{ book.No_Of_copies_Available }}</td>
+                            <td>
+                                <button type="button" class="close" aria-label="Close" onclick="removeBook(this)">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
 
+    <script> 
+        // JavaScript function to remove a book
+        function removeBook(button) {
+            var row = button.closest('tr');
+            row.remove();
+        }
+    </script>
 </body>
 </html>

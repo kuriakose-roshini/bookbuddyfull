@@ -19,10 +19,9 @@
 				<li><a href="{% url 'adminlogin' %}">Admin Login</a></li>
 				<li><a href="{% url 'about' %}">About</a></li>
 				<li><a href="{% url 'report' %}">Reports</a></li>
-			</ul> 
-		</nav>
+			</ul> </nav>
                 <form action="{% url 'search_books' %}" method="GET">
-	 		    <input type="text" name="q" placeholder="Search books...">
+	 		    <input type="text" name="q" placeholder="Search books..."id="searchbar" style="color:black;">
 	 		    <button type="submit">Search</button>
            <!-- Display search results here -->
 	 		{% if books %}

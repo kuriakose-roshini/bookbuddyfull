@@ -30,7 +30,7 @@ h2 {
 footer {
 	padding-bottom: 10px;
 	background-color: #4104040a;
-	color: rgb(0, 0, 0);
+	color: rgb(255, 255, 255);
 	padding: 1em;
 	text-align: center;
 	position: fixed;
@@ -237,7 +237,6 @@ color:rgb(0, 0, 0);
   color: #e6e1e1;
   border-radius: 6px;
   border:5px solid #201f1f;
-  
   transition: all .4s;
   border-radius: 5px;
   width: 60%;

@@ -1,9 +1,13 @@
 #mem_list {
     background: rgba(0,0,0,.75);
-    width: 100%;
+    width: 92.5%;
     height: 385px;
+    left: 25px;
     overflow-y: scroll;
     border-radius: 7.5px;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 #mem_list::-webkit-scrollbar {
     display: none;

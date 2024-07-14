@@ -20,6 +20,7 @@ urlpatterns = [
     path('managebook/', views.mngbook, name="mngbook"),
     path('managemembers/', views.mngmem, name="mngmem"),
     path('borrowers/', views.borrow, name="borrow"),
+    path('borrowers/',views.borrowers,name="borrowers"),
     path('profile/', views.profile, name="profilefa"),
     path('profile:settings/', views.profilesett, name="profilesett"),
     #path('books/',views.listBook,name='listBook'),
