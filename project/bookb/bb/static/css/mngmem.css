@@ -61,7 +61,7 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
 }
 .container {
     position: relative;
@@ -80,17 +80,13 @@ h1 {
     display: inline-block;
 }
 .nav:hover {
-    background-color: rgb(28, 146, 167);
+    background-color: rgb(214, 29, 22);
     color: white;
 }
 @media (max-width: 976px) {
     #one-page {
         height: 150%;
         background-image: url("https://cdn.wallpapersafari.com/91/90/Bmhy8U.jpg");
-        background-size: auto;
-        -webkit-background-size: auto;
-        -moz-background-size: auto;
-        -o-background-size: auto;
     }
 }
 h3 {

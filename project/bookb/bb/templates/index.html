@@ -25,13 +25,13 @@
 	 		    <button type="submit">Search</button>
            <!-- Display search results here -->
 	 		{% if books %}
-	 		<h2 class="output">Search Results:</h2>
-	 		<ul class="output">
+	 		  <h2 class="output">Search Results:</h2>
+	 		  <ul class="output">
 				{% for book in books %}
 				<li>{{ book.Title }} by {{ book.Name_of_Author }}</li>
 				{% endfor %}
-	 		</ul>
-	 		{% endif %}  
+	 		  </ul>
+			{% endif %}  
    		   </form>	
 </div>
 	<!--about -->

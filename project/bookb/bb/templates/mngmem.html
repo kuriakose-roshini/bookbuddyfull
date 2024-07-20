@@ -10,6 +10,7 @@
     <title>Book Buddy</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/mngmem.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logo.png' %}">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -100,7 +101,7 @@
                     <div class="add-button mt-4">
                         <button type="submit" name="ADD" class="btn btn-danger btn-block" id="add">ADD</button>
                         <a class="btn btn-danger btn-block" href="{% url 'mngbook' %}">Manage Book</a>
-                        <a class="btn btn-danger btn-block" href="{% url 'borrow' %}">Borrowers</a>
+                        <a class="btn btn-danger btn-block" href="{% url 'borrowers' %}">Borrowers</a>
                     </div>
                 </form>
             </div>

@@ -152,7 +152,7 @@ def mngbook(request):
                         Name_of_Author = request.POST.get('Name_of_Author')
                         Publisher = request.POST.get('Publisher')
                         Arrival_date = request.POST.get('Arrival_date')
-                        No_of_Copies_Available = request.POST.get('No_of_Copies_Available')
+                        No_of_Copies_Available = request.POST.get('No_Of_copies_Available')
                         print(Title)
                         print(Name_of_Author)
                         print(Publisher)
@@ -163,7 +163,7 @@ def mngbook(request):
                              Title=Title,
                              Name_of_Author=Name_of_Author,
                              Publisher=Publisher,
-                             Arrival_date=Arrival_date
+                             Arrival_date=Arrival_date,
                         )   
                   
     except IntegrityError as e:
@@ -263,7 +263,7 @@ def return_book(request, borrowed_book_id):
 #search book
 from django.shortcuts import render
 from .models import Book
-
+#for index
 def search_books(request):
     query = request.GET.get('q')
     if query:
@@ -271,6 +271,15 @@ def search_books(request):
     else:
         books = []
     return render(request, 'index.html',{'books': books})
+
+#for list
+def search_books_list(request):
+    query = request.GET.get('q')
+    if query:
+        books = Book.objects.filter(Title__icontains=query)
+    else:
+        books = []
+    return render(request, 'list.html',{'books': books})
 
 # def request_book(request, book_id):
 #     if request.method == 'POST':
@@ -294,14 +303,9 @@ def search_books(request):
   #    return render(request, 'borrowerdisp.html', {'borrower': borrowers})
 
 
-
-
-
-
-
 def listBook(request):
-    books = Book.objects.all()
-    return render(request, 'list.html', {'books': books})
+   books = Book.objects.all()
+   return render(request, 'list.html', {'books': books})
 
 def request_book(request, book_id):
     if request.method == 'POST':
@@ -314,6 +318,11 @@ def request_book(request, book_id):
         except Customer.DoesNotExist:
             print("No matching Customer found")
             return HttpResponse("No matching Customer found", status=404)
+        
+        borrowed_books_count = Borrower.objects.filter(b_idnumber=customer).count()
+        if borrowed_books_count >= 3:
+            messages.error(request, "You cannot borrow more than 3 books at a time.")
+            return redirect('list')
 
         borrower=Borrower.objects.create(
             b_name=customer.name,
@@ -324,6 +333,7 @@ def request_book(request, book_id):
             b_return_date=timezone.now() + timezone.timedelta(days=14), # Example: 14 days borrowing period
             b_bookid=book
         )
+        messages.success(request, "Book requested successfully")
         return redirect('list')
 
     return HttpResponse(status=405)
@@ -331,3 +341,50 @@ def request_book(request, book_id):
 def borrowers(request):
       borrowers = Borrower.objects.all()
       return render(request,'borrowerdisp.html',{'borrowers': borrowers})
+
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+def delete_borrower(request, borrower_id):
+    if request.method == 'DELETE':
+        borrower = get_object_or_404(Borrower, id=borrower_id)
+        borrower.delete()
+        
+        # Reset IDs after deletion
+        borrowers = Borrower.objects.all().order_by('id')
+        for index, borrower in enumerate(borrowers):
+            borrower.id = index + 1
+            borrower.save()
+        
+        return JsonResponse({'message': 'Borrower deleted and IDs reset successfully.'}, status=200)
+    return JsonResponse({'error': 'Invalid request method.'}, status=405)
+
+
+def delete_book(request, book_id):
+    if request.method == 'POST':
+        book = get_object_or_404(Book, id=book_id)
+        book.delete()
+        reset_book_ids()  # Call the function to reset IDs
+        return JsonResponse({'success': True})
+    return JsonResponse({'success': False}, status=400)
+
+def reset_book_ids():
+    books = Book.objects.all().order_by('id')
+    for index, book in enumerate(books, start=1):
+        book.id = index
+        book.save()
+
+
+#import json
+#@csrf_exempt
+#def add_book(request):
+#    if request.method == 'POST':
+#        data = json.loads(request.body)
+ #       book = Book.objects.create(
+  #          Title=data.get('Title'),
+   #         Name_of_Author=data.get('Name_of_Author'),
+    #        Publisher=data.get('Publisher'),
+     #       Arrival_date=data.get('Arrival_date'),
+      #      No_Of_Copies_Available=data.get('No_Of_Copies_Available')
+       # )
+      #  return JsonResponse({'success': True, 'id': book.id})
+    #return JsonResponse({'success': False})
