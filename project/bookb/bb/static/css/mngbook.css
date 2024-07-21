@@ -1,98 +1,59 @@
-#book_list{
+#book_list {
     background: rgba(0,0,0,.75);
-    width: 92.5%;
-    height: 385px;
-    left: 25px;
-    overflow-y: scroll;
+    width: 100%;
+    overflow-y: auto;  /* Enable vertical scroll */
+    max-height: 600px; /* Adjust as needed */
     border-radius: 7.5px;
-    &::-webkit-scrollbar {
-        display: none;
-    }
-    table{
-        background: rgba(256,256,256,.75);
-        border-radius: 7.5px;
-        
-        thead{
-            color: #1a1a1a;
-        }
-        tbody{
-            color: #262626;
-        }
-        
-    }
 }
 
-#insertion_section{
+#insertion_section {
     background: rgba(0,0,0,.75);
     border-radius: 7.5px;
     padding: 15px 10px 15px 10px;
     width: 100%;
-    .form-group{
-        width: 90%;
-        margin-left: 10%;
-
-        input,label{
-            width: 90%;
-        }
-        input{
-            opacity: .20;
-            transition: .5s;
-            outline: none;
-        }
-
-        #two-section{
-            margin-left: -7.5%;
-            input{
-                width: 85%;
-            }
-        }
-        button{
-            margin-left: -5%;
-        }
-
-    }
-
 }
 
-body{
+body {
     padding: 0;
     margin: 0;
     height: 100vh;
 }
-/* 
-Wallpaper
-Source: https://wallpapersafari.com/hd-library-wallpaper/ 
-*/
-#one-page{
+
+#one-page {
     height: 100%;
     background-image: url("https://cdn.wallpapersafari.com/91/90/Bmhy8U.jpg");
-    background-size: auto;
-    -webkit-background-size: auto;
-    -moz-background-size: auto;
-    -o-background-size: auto ;
-    
+    background-size: cover;
 }
-.container{
+
+.container {
     position: relative;
     top: 15%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
-h1{
+
+h1 {
     font-size: 50px;
 }
 
-@media (max-width: 976px){
-    #one-page{
+@media (max-width: 976px) {
+    #one-page {
         height: 150%;
         background-image: url("https://cdn.wallpapersafari.com/91/90/Bmhy8U.jpg");
         background-size: auto;
-        -webkit-background-size: auto;
-        -moz-background-size: auto;
-        -o-background-size: auto ; 
     }
 }
-button{
-    border-radius: 20px;
-    float: right;
-    font-size: large;
-    width:10%;
+.nav:link {
+    background-color: white;
+    color: black;
+    border: 2px solid green;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+.nav:hover {
+    background-color: rgb(214, 29, 22);
+    color: white;
 }

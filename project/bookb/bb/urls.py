@@ -30,5 +30,6 @@ urlpatterns = [
     path('delete_borrower/<int:borrower_id>/', views.delete_borrower, name='delete_borrower'),
     #path('add_book/', views.add_book, name='add_book'),
     path('delete_book/<int:book_id>/', views.delete_book, name='delete_book'),
+    path('delete_member/<int:member_id>/', views.delete_member, name='delete_member'),
     
     ]

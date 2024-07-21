@@ -39,7 +39,8 @@ class Book(models.Model):
     Name_of_Author=models.CharField(max_length=200)
     Publisher=models.CharField(max_length=250)
     Arrival_date=models.DateField()  
-    No_Of_copies_Available=models.CharField(max_length=30,null=False)
+   # No_Of_copies_Available=models.CharField(max_length=30,null=False)
+    No_of_Copies_Available=models.CharField(max_length=30,null=False)
        
     def __str__(self):
            return self.Title
@@ -128,6 +129,7 @@ class Borrower(models.Model):
    # b_title =models.CharField(max_length=200)
     b_bookid = models.ForeignKey(Book, on_delete=models.CASCADE)
     #b_title=models.ForeignKey(Book, on_delete=models.CASCADE,default=1) 
+    
 
     def _str_(self):
         return self.b_username

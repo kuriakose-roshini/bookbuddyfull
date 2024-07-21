@@ -23,7 +23,7 @@ urlpatterns = [
     #path('',views.Register,name='user'),
     path('',include('bb.urls')),
     path('admin/', admin.site.urls),
-    
+
     
     
 ]

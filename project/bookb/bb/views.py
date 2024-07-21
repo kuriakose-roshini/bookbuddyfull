@@ -103,7 +103,7 @@ def Register(request):
         print(error_message)
         messages.error(request,error_message)
 
-       
+      
     print("inside register")
     return render(request,'register.html')
 
@@ -152,7 +152,7 @@ def mngbook(request):
                         Name_of_Author = request.POST.get('Name_of_Author')
                         Publisher = request.POST.get('Publisher')
                         Arrival_date = request.POST.get('Arrival_date')
-                        No_of_Copies_Available = request.POST.get('No_Of_copies_Available')
+                        No_of_Copies_Available = request.POST.get('No_of_Copies_Available')
                         print(Title)
                         print(Name_of_Author)
                         print(Publisher)
@@ -219,9 +219,7 @@ def borrow(request):
 @login_required  
 def profile(request):
     return render(request, 'profilefa.html')
-#def profile(request):
- #       template = loader.get_template('profilefa.html')
-  #      return HttpResponse(template.render())   
+ 
 def profilesett(request):
         template = loader.get_template('profilesett.html')
         return HttpResponse(template.render())   
@@ -388,3 +386,24 @@ def reset_book_ids():
        # )
       #  return JsonResponse({'success': True, 'id': book.id})
     #return JsonResponse({'success': False})
+
+
+@csrf_exempt
+def delete_member(request, member_id):
+    if request.method == 'DELETE':
+        member = get_object_or_404(Customer, id=member_id)
+        member.delete()
+        
+        # Reset IDs after deletion
+        reset_member_ids()
+        
+        return JsonResponse({'message': 'Member deleted.'}, status=200)
+    return JsonResponse({'error': 'Invalid request method.'}, status=405)
+
+from django.db import transaction
+@transaction.atomic
+def reset_member_ids():
+    members = Customer.objects.all().order_by('id')
+    for index, member in enumerate(members, start=1):
+        member.id = index
+        member.save()

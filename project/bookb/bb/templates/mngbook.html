@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,6 +28,11 @@
         /* Custom CSS */
         #book_list {
             margin-top: 20px;
+            overflow-y: auto;
+            max-height: 600px; /* Adjust as needed */
+            background: rgba(0,0,0,.75);
+            border-radius: 7.5px;
+            width: 100%;
         }
         .table-striped tbody tr:nth-of-type(odd) {
             background-color: #ffff;
@@ -39,6 +43,52 @@
         .close:hover {
             color: red;
         }
+        #insertion_section {
+            background: rgba(0,0,0,.75);
+            border-radius: 7.5px;
+            padding: 15px 10px 15px 10px;
+            width: 100%;
+        }
+        body {
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+        }
+        #one-page {
+            height: 100%;
+            background-image: url("https://cdn.wallpapersafari.com/91/90/Bmhy8U.jpg");
+            background-size: cover;
+        }
+        .container {
+            position: relative;
+            top: 15%;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        h1 {
+            font-size: 50px;
+        }
+        @media (max-width: 976px) {
+            #one-page {
+                height: 150%;
+                background-image: url("https://cdn.wallpapersafari.com/91/90/Bmhy8U.jpg");
+                background-size: auto;
+            }
+        }
+        .nav:link {
+            background-color: white;
+            color: black;
+            border: 2px solid green;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .nav:hover {
+            background-color: rgb(214, 29, 22);
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -47,121 +97,83 @@
             <!-- Title -->
             <div class="row">
                 <h1 class="text-light">Book Buddy</h1><br>
-                <h3>Book Management</h3>
+                <h3 class="text-light">Book Management</h3>
             </div>
             <a class="nav" href="{% url 'Logout' %}">Logout</a>
-            
-            <!-- Insertion Section -->
-            <div id="insertion_section">
-                <form action="" id="RegForm" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="title" placeholder="Title" name="title" required>
-                        <label for="title">Title</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="name_of_author" placeholder="Name_of_Author" name="name_of_author" required>
-                        <label for="name_of_author">Name of Author</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="publisher" placeholder="Publisher" name="publisher" required>
-                        <label for="publisher">Publisher</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="date" class="form-control" id="Arrival_Date" placeholder="Arrival_Date" name="Arrival_Date" required>
-                        <label for="Arrival_Date">Arrival Date</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="No_Of_Copies_Available" placeholder="No of copies available" name="No_Of_Copies_Available" required>
-                        <label for="No_Of_Copies_Available">No of Copies Available</label>
-                    </div>
-                    <div class="add-button mt-4">
-                        <button type="submit" name="ADD" class="btn btn-danger btn-block" id="add">ADD</button>
-                        <a class="btn btn-danger btn-block" href="{% url 'mngmem' %}">Manage Member</a>
-                        <a class="btn btn-danger btn-block" href="{% url 'borrowers' %}">Borrowers</a>
-                    </div>
-                </form>
-            </div>
 
-            <!-- Book List -->
-            <div id="book_list">
-                <table class="table table-borderless table-striped mt-3" style="background-color: white;"border: 2">
-                    <thead>
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Author</th>
-                            <th scope="col">Publisher</th>
-                            <th scope="col">Arrival_Date</th>
-                            <th scope="col">No_Of_Copies_Available</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabs">
-                        {% for book in books %}
-                        <tr data-id="{{ book.id }}">
-                            <td>{{ book.id }}</td>
-                            <td>{{ book.Title }}</td>
-                            <td>{{ book.Name_of_Author }}</td>
-                            <td>{{ book.Publisher }}</td>
-                            <td>{{ book.Arrival_date }}</td>
-                            <td>{{ book.No_Of_copies_Available }}</td>
-                            <td>
-                                <button type="button" class="close" aria-label="Close" onclick="deleteBook(this)">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+            <!-- Flex Container for Left and Right Sections -->
+            <div class="d-flex flex-row-reverse">
+                <!-- Book List -->
+                <div id="book_list" class="p-3" style="flex: 2;">
+                    <table class="table table-borderless table-striped mt-3" style="background-color: white;" border="2">
+                        <thead>
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Author</th>
+                                <th scope="col">Publisher</th>
+                                <th scope="col">Arrival_Date</th>
+                                <th scope="col">No_of_Copies_Available</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabs">
+                            {% for book in books %}
+                            <tr data-id="{{ book.id }}">
+                                <td>{{ book.id }}</td>
+                                <td>{{ book.Title }}</td>
+                                <td>{{ book.Name_of_Author }}</td>
+                                <td>{{ book.Publisher }}</td>
+                                <td>{{ book.Arrival_date }}</td>
+                                <td>{{ book.No_of_Copies_Available }}</td>
+                                <td>
+                                    <button type="button" class="close" aria-label="Close" onclick="deleteBook(this)">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Insertion Section -->
+                <div id="insertion_section" class="p-3" style="flex: 1;">
+                    <form action="" id="RegForm" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="Title" placeholder="Title" name="Title" required>
+                            <label for="Title">Title</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="Name_of_Author" placeholder="Name_of_Author" name="Name_of_Author" required>
+                            <label for="Name_of_Author">Name of Author</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="Publisher" placeholder="Publisher" name="Publisher" required>
+                            <label for="Publisher">Publisher</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="date" class="form-control" id="Arrival_Date" placeholder="Arrival_Date" name="Arrival_Date" required>
+                            <label for="Arrival_Date">Arrival Date</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="No_of_Copies_Available" placeholder="No of copies available" name="No_of_Copies_Available" required>
+                            <label for="No_of_Copies_Available">No of copies Available</label>
+                        </div>
+                        <div class="add-button mt-4">
+                            <button type="submit" name="ADD" class="btn btn-danger btn-block" id="add">ADD</button>
+                            <a class="btn btn-danger btn-block" href="{% url 'mngmem' %}">Manage Member</a>
+                            <a class="btn btn-danger btn-block" href="{% url 'borrowers' %}">Borrowers</a>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
-    </body>
+</body>
 
-   //<script> 
-        // JavaScript function to remove a book
-        //function removeBook(button) {
-          //  var row = button.closest('tr');
-           // row.remove();
-        //}
-    //</script>
-    <script>
-    <!--function addBook() {
-            const title = document.getElementById('title').value;
-            const nameOfAuthor = document.getElementById('name_of_author').value;
-            const publisher = document.getElementById('publisher').value;
-            const arrivalDate = document.getElementById('Arrival_Date').value;
-            const noOfCopiesAvailable = document.getElementById('No_Of_Copies_Available').value;
-
-            fetch('/add_book/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': '{{ csrf_token }}'
-                },
-                body: JSON.stringify({
-                    Title: title,
-                    Name_of_Author: nameOfAuthor,
-                    Publisher: publisher,
-                    Arrival_date: arrivalDate,
-                    No_Of_Copies_Available: noOfCopiesAvailable
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    location.reload();  // Reload the page to reflect the new book in the list
-                } else {
-                    alert('Failed to add the book.');
-                }
-            })
-            .catch(error => console.error('Error:', error));
-            }-->
-
-
-
-
+<script>
     function deleteBook(button) {
         var row = button.closest('tr');
         var bookId = row.getAttribute('data-id');
@@ -171,14 +183,14 @@
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRFToken': '{{ csrf_token }}'  // Ensure CSRF token is included
+                    'X-CSRFToken': '{{ csrf_token }}'
                 },
                 body: JSON.stringify({ id: bookId })
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    row.remove();  // Remove the row from the table
+                    row.remove();
                 } else {
                     alert('Failed to delete the book.');
                 }
@@ -186,21 +198,5 @@
             .catch(error => console.error('Error:', error));
         }
     }
-
-    <!--function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-            }-->
 </script>
-
 </html>

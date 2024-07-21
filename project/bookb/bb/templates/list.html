@@ -121,7 +121,7 @@
     <td>{{ book.Name_of_Author }}</td>
     <td>{{ book.Publisher }}</td>
     <td>{{ book.Arrival_date }}</td>
-    <td>{{ book.No_Of_copies_Available }}</td>
+    <td>{{ book.No_of_Copies_Available }}</td>
     <td>
         <form method="POST" action="{% url 'request_book' book.id %}">
             {% csrf_token %}
