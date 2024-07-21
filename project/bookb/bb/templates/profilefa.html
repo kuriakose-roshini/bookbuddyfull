@@ -29,7 +29,7 @@
             </li>
             <li>
                 <a href="#notification">
-                    <span class="icon-count">0</span>
+                    <span class="icon-count">{{ total_fine}}</span>
                     <i class="fa fa-bell fa-2x"></i>
                 </a>
             </li>
@@ -66,6 +66,8 @@
                 <hr align="center">
             </div>
         </div>
+        <h1> Fine:Rs.{{ total_fine}}</h1>
+
     </div>
     <!-- End -->
 
@@ -77,26 +79,6 @@
                 <i class="fa fa-pen fa-xs edit"></i>
                 <table>
                     <tbody>
-                       <!-- <tr>
-                            <td>Name</td>
-                            <td>:</td>
-                            <td>{{ user.name }}</td>
-                        </tr>
-                        <tr>
-                            <td>Email</td>
-                            <td>:</td>
-                            <td>{{ user.email }}</td>
-                        </tr>
-                        <tr>
-                            <td>Username</td>
-                            <td>:</td>
-                            <td>{{ user.username }}</td>
-                        </tr>-->
-                        <!--<tr>
-                            <td>DEPARTMENT</td>
-                            <td>:</td>
-                            <td>CSE</td>
-                        </tr>-->
                         <tr><td>Name : {{ user.first_name }}</td></tr>
                         <tr><td>Username : {{ user.username }}</td></tr>
                         <tr><td>Email : {{ user.email }}<td></tr>
@@ -105,6 +87,53 @@
                 </table>
             </div>
         </div>
+
+{% block content %}
+<!--<h1>Profile</h1>-->
+<h2>Borrowed Books</h2>
+<ul class="card">
+    {% for book in borrowed_books %}
+    <li>
+        {{ book.b_bookid.Title }} - Due Date: {{ book.b_return_date }}
+        {% if fines.book.id > 0 %}
+        <p style="color: red;">Fine: ${{ fines.book.id }}</p>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+        <!--borrowerd books display
+        <h2>Borrowed Books:</h2>
+        <div class="card">
+            <div class="card-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Return Date</th>
+                            <th>Fine</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for book in borrowed_books %}
+                        <tr>
+                            <td>{{ book.b_bookid.Title }}</td>
+                            <td>{{ book.b_return_date }}</td>
+                            <td>
+                                {% if book.calculate_fine > 0 %}
+                                <span style="color: red;">${{ book.calculate_fine }}</span>
+                                {% else %}
+                                $0
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>-->
         
 </body>
 </html>

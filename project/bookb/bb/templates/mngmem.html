@@ -112,7 +112,7 @@
                     <table class="table table-borderless table-striped mt-3" id="mem_list" style="background-color: white;" border="2">
                         <thead>
                             <tr>
-                                <th scope="col">No</th>
+                                <th scope="col">Id</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Username</th>
                                 <th scope="col">Email</th>
@@ -123,7 +123,7 @@
                         <tbody id="tabs">
                             {% for reader in reader %}
                             <tr class="tab">
-                                <td>{{reader.id}}
+                                <td>{{reader.id}}</td>
                                 <td>{{ reader.name }}</td>
                                 <td>{{ reader.user.username }}</td>
                                 <td>{{ reader.user.email }}</td>

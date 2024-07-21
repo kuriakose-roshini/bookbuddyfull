@@ -76,11 +76,11 @@
              <div class="card-body">
                  <form id="profile-form">
                      <label for="name">Name:</label><br>
-                     <input type="text" id="name" name="name" value="Roshini" ><br>
+                     <input type="text" id="name" name="name" value="{{user.first_name}}" ><br>
                      <label for="email">Email:</label><br>
-                     <input type="email" id="email" name="email" value= "roshini@gmail.com" ><br>
+                     <input type="email" id="email" name="email" value="{{user.email}}" ><br>
                      <label for="username">Username:</label><br>
-                     <input type="text" id="username" name="username" value= "Roshini_123"><br>
+                     <input type="text" id="username" name="username" value= "{{user.username}}"><br>
                      <!--<label for="Department">Department:</label><br>
                      <input type="text" id="dept" name="dept" value="CSE">-->
                      <button type="submit">Save Changes</button>
@@ -98,15 +98,15 @@ form.addEventListener('submit', (e) => {
 
   const name = document.getElementById('name').value;
   const email = document.getElementById('email').value;
-  const memid = document.getElementById('memid').value;
+  const username = document.getElementById('username').value;
   //const dept = document.getElementById('dept').value;
   // Perform any necessary validation here
 
   // Update the user's profile
-  updateProfile(name, email,memid);
+  updateProfile(name, email,username);
 });
 
-function updateProfile(name, email,memid) {
+function updateProfile(name, email,username) {
   // Make an API request or perform any necessary logic to update the user's profile
 
   // Display a success message

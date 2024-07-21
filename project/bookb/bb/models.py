@@ -12,6 +12,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.utils import timezone
 from django.db import models
 from django.utils import timezone
+from datetime import datetime
 
 # Create your models here.
 # class Reader(models.Model):
@@ -129,10 +130,28 @@ class Borrower(models.Model):
    # b_title =models.CharField(max_length=200)
     b_bookid = models.ForeignKey(Book, on_delete=models.CASCADE)
     #b_title=models.ForeignKey(Book, on_delete=models.CASCADE,default=1) 
+
+#from datetime import datetime
+    def calculate_fine(self):
+        due_date = self.b_return_date
+        #now = timezone.now()
+        now = datetime.now().date()
+        if now > due_date:
+            days_overdue = (now - due_date).days
+            fine = days_overdue * 5  # Example fine rate: $5 per day
+            return fine
+        return 0
     
 
-    def _str_(self):
-        return self.b_username
+    #def _str_(self):
+     #  return self.b_username
+    #def calculate_fine(self):
+     #   today = timezone.now()
+      #  if today > self.b_return_date:
+       #     days_overdue = (today - self.b_return_date).days
+        #    fine_amount = days_overdue * 1.00  # Example: $1.00 per day overdue
+         #   return fine_amount
+        #return 0
     
 #profile
 class Profile(models.Model):

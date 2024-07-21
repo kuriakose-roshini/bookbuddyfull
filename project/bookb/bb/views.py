@@ -216,9 +216,33 @@ def borrow(request):
       template = loader.get_template('borrowerdisp.html')
       return HttpResponse(template.render())     
        
-@login_required  
+#@login_required  
+#def profile(request):
+ #   return render(request, 'profilefa.html')
+
+
+@login_required
 def profile(request):
-    return render(request, 'profilefa.html')
+    customer = request.user.customer_profile
+    borrowed_books = Borrower.objects.filter(b_idnumber=customer)
+    #fines = {borrower.id: borrower.calculate_fine() for borrower in borrowed_books}
+    fines = {}
+    total_fine = 0
+    for book in borrowed_books:
+        fine = book.calculate_fine()
+        fines[book.id] = fine
+        total_fine += fine
+
+    return render(request, 'profilefa.html', {
+        'borrowed_books': borrowed_books,
+        'fines': fines,
+        'total_fine': total_fine,
+    })
+
+#@login_required
+#def profile(request):
+ #   borrowed_books = Borrower.objects.filter(b_idnumber=request.user.customer_profile)
+  #  return render(request, 'profile.html', {'borrowed_books': borrowed_books})
  
 def profilesett(request):
         template = loader.get_template('profilesett.html')
@@ -253,8 +277,8 @@ from django.shortcuts import render, redirect
 from .models import BorrowedBook
 
 def return_book(request, borrowed_book_id):
-    borrowed_book = BorrowedBook.objects.get(pk=borrowed_book_id)
-    fine = borrowed_book.calculate_fine
+    borrowed_book =get_object_or_404(Borrower, id=borrowed_book_id)
+    fine = borrowed_book.calculate_fine()
     # You can add the fine to the user's account or display it on the return page
     return render(request, 'return_book.html', {'fine': fine})
 
